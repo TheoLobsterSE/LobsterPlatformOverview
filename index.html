@@ -44,6 +44,29 @@ header img{height:40px;display:block}
 .lang button[aria-pressed="true"]{background:var(--g500);color:var(--g900)}
 .lang button:not([aria-pressed="true"]):hover{background:var(--g800)}
 html[lang="en"] .fig::after{content:"Enlarge ⤢"}
+/* Mode présentation : l'essentiel seulement */
+html[data-mode="pres"] .pitch,
+html[data-mode="pres"] .points span,
+html[data-mode="pres"] .pfbox,
+html[data-mode="pres"] .story,
+html[data-mode="pres"] .panel .note,
+html[data-mode="pres"] .caption,
+html[data-mode="pres"] .card p,
+html[data-mode="pres"] #rm-chips,
+html[data-mode="pres"] .hint{display:none}
+html[data-mode="pres"] .points{display:none}
+.short{display:none}
+html[data-mode="pres"] .short{display:block}
+.hook{font:900 clamp(24px,2.4vw,32px)/1.2 var(--head);color:var(--white);margin-bottom:24px}
+.spts{list-style:none;display:grid;gap:16px;margin-bottom:24px}
+.spts li{display:grid;gap:2px;padding-left:16px;border-left:4px solid var(--g500)}
+.spts b{font:900 18px/1.2 var(--head);color:var(--g500)}
+.spts span{font-size:19px;line-height:1.35;color:var(--white)}
+html[data-mode="pres"] .stat span{font-size:13px}
+html[data-mode="pres"] .card{align-items:flex-start}
+html[data-mode="pres"] .card b{font-size:18px}
+html[data-mode="pres"] .card .ri{width:44px;height:44px}
+html[data-mode="pres"] .d-head p{font-size:24px}
 .lead{font-weight:300;font-size:22px;color:var(--g50);max-width:760px}
 .platform{display:inline-block;margin-top:24px;padding:8px 24px;border:2px solid var(--g500);border-radius:999px;color:var(--g500);font:700 16px var(--head)}
 
@@ -240,6 +263,7 @@ footer{margin-top:auto;padding-top:32px}
   <header>
     <img src="assets/Lobster_Logo_RGB__white.svg" alt="Lobster">
     <div class="hright">
+      <div class="lang" id="modesw" role="group" aria-label="Mode"><button id="m-pres" aria-pressed="true" data-t>Présentation</button><button id="m-full" aria-pressed="false" data-t>Détail</button></div>
       <div class="lang" role="group" aria-label="Langue / Language"><button id="l-fr" aria-pressed="true">FR</button><button id="l-en" aria-pressed="false">EN</button></div>
     </div>
   </header>
@@ -287,6 +311,7 @@ footer{margin-top:auto;padding-top:32px}
           <small id="d-num"></small>
           <h2 id="d-title"></h2>
           <p id="d-sub"></p>
+          <span class="pftag" id="d-pf" style="margin-top:12px"></span>
         </div>
       </div>
       <div class="panels">
@@ -332,6 +357,7 @@ const TAGICON = {ia:'spark', agents:'robot', api:'link', efact:'doc', partners:'
 const ITEMS = [
   { icon:'puzzle', title:"Plateforme no-code unifiée, infusée d'IA",
     text:'Réunit EDI, EAI, API et ETL dans un seul outil visuel',
+    short:{"hook":"Une seule façon de construire : 6 phases, partout.","pts":[["Lisible","Chaque intégration se lit d'un coup d'œil"],["Maintenable","La phase en échec nomme la panne"],["Réutilisable","On passe d'AS2 à REST sans toucher au mappage"],["Gouverné","Journalisation et règles liées aux phases"],["Performant","Un EDIFACT lourd vers un IDoc SAP, sans toile de fils"]]},
     pf:"Aides à la conception, mappage automatique (y compris EDIFACT), recherche de fonctions en langage courant, descriptions de profils générées et erreurs expliquées en clair : l\u0027IA vit dans l\u0027outil.",
     pitch:"Un canevas vide laisse chaque projet inventer sa propre structure. Lobster impose à la place un cycle de vie unique en 6 phases (Entrée, Analyse, Transformation, Structure SQL, Formatage, Sortie), dans un seul outil visuel pour l'EDI, l'EAI, les API et l'ETL.",
     vs:{ blank:['Canevas vide',['Chaque projet invente sa structure','Un graphe sur mesure à décoder','Des routes de capture ajoutées au cas par cas']],
@@ -354,6 +380,7 @@ const ITEMS = [
   },
   { icon:'gauge', title:'Performance industrielle',
     text:'Flexibilité de déploiement et scalabilité',
+    short:{"hook":"Déployez où vous voulez, montez en charge sans refonte.","pts":[["Déploiement","Sur site, cloud privé ou Lobster Cloud"],["Haute disponibilité","Bascule gérée par Lobster, sans équilibreur externe"],["Évolutivité","Ajoutez des nœuds ou changez de taille, de M à 2XL"],["Mises à jour","Sans interruption"]]},
     pf:"Pathfinder aide à comprendre les problèmes de traitement : il analyse les traces d\u0027erreur des journaux serveur et en fait ressortir les causes.",
     pitch:"Déployez là où vos contraintes l'exigent, montez en charge sans refonte et gardez la plateforme disponible.",
     points:[
@@ -375,6 +402,7 @@ const ITEMS = [
   },
   { icon:'handshake', title:'Gestion des partenaires',
     text:'Un onboarding plus rapide, sans gros projet IT',
+    short:{"hook":"Le partenaire se configure lui-même.","pts":[["Un lien","Le partenaire choisit son protocole et saisit ses informations"],["Direct","La configuration arrive dans la plateforme, sans ressaisie"],["Suivi","L'équipe voit l'avancement, sans relancer"],["Résultat","Des jours, pas des semaines"]]},
     pf:"Pathfinder explique en clair les erreurs des tests de connexion que les partenaires lancent dans le gestionnaire de partenaires, sans expertise technique.",
     pitch:"Le partenaire configure lui-même sa connexion. Plus de courriels à répétition ni de tableurs : l'équipe suit l'avancement sans relancer.",
     points:[
@@ -396,6 +424,7 @@ const ITEMS = [
   },
   { icon:'globe', title:'Formats universels',
     text:'Prise en charge native des principaux standards et protocoles',
+    short:{"hook":"Tous vos mondes de données, un seul outil.","pts":[["Protocoles","AS2, AS4, Peppol, SFTP, Kafka, MQTT, OPC UA, SAP…"],["Formats","EDIFACT, X12, IDoc, XML, JSON, CSV, PDF…"],["Tous les mondes","Partenaires, ERP, IoT, big data, cloud hybride"],["Ancien et moderne","Une API REST peut alimenter un EDIFACT ou un IDoc SAP"]]},
     pf:"Pathfinder génère le mappage entre les formats (XML, JSON, EDI) et aide à écrire les expressions JSONPath, XPath et RegEx.",
     pitch:"Vos partenaires, vos machines et vos applications parlent des langues différentes. Lobster les comprend toutes, sans développement spécifique.",
     points:[
@@ -415,6 +444,7 @@ const ITEMS = [
   },
   { icon:'portal', title:'Portails métiers',
     text:'Action métier sans ticket IT',
+    short:{"hook":"Numérisez vos processus, au-dessus de l'intégration.","pts":[["Sans code","Construisez vos applications métier en 3 niveaux"],["Enrichir","Recherches en temps réel dans vos systèmes"],["Décider","Portails en libre-service, sans ticket IT"],["Agents IA","Des portails construits à partir d'un prompt (préversion)"]]},
     pf:"Pathfinder organise en un clic la mise en page des formulaires.",
     pitch:"Numérisez vos processus métier au-dessus de la couche d'intégration : des applications sans code, ouvertes aux équipes internes, aux partenaires et aux agents IA, exécutées comme un seul processus.",
     points:[
@@ -442,6 +472,7 @@ const ITEMS = [
   },
   { icon:'db', title:'Serveur MCP natif',
     text:'Données legacy exposées aux LLM, sans RAG',
+    short:{"hook":"Vos systèmes legacy, à portée de votre IA.","pts":[["Standard ouvert","Lobster fait office de serveur MCP"],["Données en direct","Pas de RAG, pas de lac de données"],["Outils lisibles","Chaque outil a un nom et une description"],["Sécurisé","Mêmes règles d'accès que la plateforme"]]},
     pf:"Pathfinder est l\u0027IA intégrée à Lobster. Le serveur MCP, lui, ouvre en plus la plateforme à vos propres assistants IA.",
     pitch:"Lobster expose vos systèmes existants aux assistants IA via un standard ouvert, en temps réel. Pas de pipeline RAG, pas de lac de données.",
     points:[
@@ -460,6 +491,7 @@ const ITEMS = [
   },
   { icon:'trace', title:'Traçabilité de bout en bout',
     text:'Supervision centralisée et alertes proactives',
+    short:{"hook":"On voit où ça casse, et pourquoi.","pts":[["Phase en échec","La cause est localisée : transport, structure ou logique"],["Un identifiant","Un job parent relie tous les profils d'une transaction"],["Carte vivante","La Process Map montre les dépendances"],["Erreurs claires","Pathfinder les explique en langage courant"]]},
     pf:"Pathfinder traduit les erreurs en langage clair, dans le Control Center et dans l\u0027aperçu des logs : le support de premier niveau résout sans escalade.",
     pitch:"Chaque message est suivi du début à la fin. Quand quelque chose casse, la plateforme dit où et pourquoi, en langage clair.",
     points:[
@@ -480,6 +512,7 @@ const ITEMS = [
   },
   { icon:'shield', title:'API de plateforme agentique',
     text:'Garde-fous déterministes à chaque étape',
+    short:{"hook":"L'IA propose, la plateforme décide.","pts":[["Chemin imposé","Toute action d'IA passe par les 6 phases"],["Contrôle central","Droits, audit, masquage, validation humaine"],["API sans code","Un profil devient un endpoint REST sécurisé"],["Vos propres agents","Construisent et exploitent Lobster via l'API de plateforme"]]},
     pf:"Pathfinder et vos propres agents passent par le même point de contrôle : droits d\u0027accès, piste d\u0027audit, masquage des données, choix du modèle et validation humaine.",
     pitch:"L'IA peut demander une action. La plateforme décide si, et comment, elle s'exécute. Un accès libre d'une IA à l'ERP est un risque ; ici, tout passe par des règles fixes et auditables.",
     points:[
@@ -511,6 +544,8 @@ Object.assign(EN, {"Écran « Mon entreprise » du gestionnaire de partenaires, 
 Object.assign(EN, {"Aides à la conception, mappage automatique (y compris EDIFACT), recherche de fonctions en langage courant, descriptions de profils générées et erreurs expliquées en clair : l\u0027IA vit dans l\u0027outil.":"Design aids, auto-mapping (including EDIFACT), function search in everyday language, generated profile descriptions and errors explained in plain language: the AI lives inside the tool.","Pathfinder aide à comprendre les problèmes de traitement : il analyse les traces d\u0027erreur des journaux serveur et en fait ressortir les causes.":"Pathfinder helps make sense of processing problems: it analyses error traces in server logs and surfaces the causes.","Pathfinder explique en clair les erreurs des tests de connexion que les partenaires lancent dans le gestionnaire de partenaires, sans expertise technique.":"Pathfinder explains, in plain language, the errors from connection tests that partners run in the partner manager, no technical expertise needed.","Pathfinder génère le mappage entre les formats (XML, JSON, EDI) et aide à écrire les expressions JSONPath, XPath et RegEx.":"Pathfinder generates the mapping between formats (XML, JSON, EDI) and helps write JSONPath, XPath and regular expressions.","Pathfinder organise en un clic la mise en page des formulaires.":"Pathfinder lays out forms in one click.","Pathfinder est l\u0027IA intégrée à Lobster. Le serveur MCP, lui, ouvre en plus la plateforme à vos propres assistants IA.":"Pathfinder is the AI built into Lobster. The MCP server opens the platform to your own AI assistants as well.","Pathfinder traduit les erreurs en langage clair, dans le Control Center et dans l\u0027aperçu des logs : le support de premier niveau résout sans escalade.":"Pathfinder turns errors into plain language, in the Control Center and in the logs overview, so first-level support resolves without escalation.","Pathfinder et vos propres agents passent par le même point de contrôle : droits d\u0027accès, piste d\u0027audit, masquage des données, choix du modèle et validation humaine.":"Pathfinder and your own agents go through the same control point: access rights, audit trail, data masking, model choice and human approval.","Pathfinder, le copilote IA intégré à Lobster, est présent dans chacun de ces différenciateurs.":"Pathfinder, Lobster\u0027s built-in AI copilot, is embedded in each of these differentiators.","Pathfinder, l\u0027IA intégrée":"Pathfinder, the built-in AI","Dans ce différenciateur":"In this differentiator"});
 Object.assign(EN, {"99,5 %":"99.5%","99,95 %":"99.95%","SLA, infrastructure standard · disponibilité constatée : 99,98 % · 200+ clients · 500+ VM · env. 1,75 h d\u0027arrêt par an":"SLA, standard infrastructure · observed uptime: 99.98% · 200+ customers · 500+ VMs · approx. 1.75 h downtime per year","SLA, haute disponibilité · disponibilité constatée : 99,999 % · 20+ clients critiques · 125+ VM · env. 5,26 min d\u0027arrêt par an":"SLA, high availability · observed uptime: 99.999% · 20+ mission-critical customers · 125+ VMs · approx. 5.26 min downtime per year","Disponibilité moyenne constatée sur AWS, février 2025 à février 2026.":"Average uptime observed on AWS, February 2025 to February 2026."});
 Object.assign(EN, {"Réunit EDI, EAI, API et ETL dans un seul outil visuel":"Bringing EDI, EAI, API and ETL together in one visual tool","Un onboarding plus rapide, sans gros projet IT":"Supporting faster onboarding without requiring a major IT project","Prise en charge native des principaux standards et protocoles":"Native support for all major standards and protocols","Supervision centralisée et alertes proactives":"Central monitoring and proactive alerts"});
+Object.assign(EN, {"Présentation":"Presenter","Détail":"Detailed"});
+Object.assign(EN, {"Une seule façon de construire : 6 phases, partout.":"One way to build: 6 phases, everywhere.","Lisible":"Readable","Chaque intégration se lit d'un coup d'œil":"Every integration reads at a glance","Maintenable":"Maintainable","La phase en échec nomme la panne":"The failing phase names the fault","Réutilisable":"Reusable","On passe d'AS2 à REST sans toucher au mappage":"Swap AS2 for REST without touching the mapping","Gouverné":"Governed","Journalisation et règles liées aux phases":"Logging and rules tied to the phases","Performant":"Performant","Un EDIFACT lourd vers un IDoc SAP, sans toile de fils":"Heavy EDIFACT to SAP IDoc, no web of wires","Déployez où vous voulez, montez en charge sans refonte.":"Deploy anywhere, scale without a rebuild.","Déploiement":"Deployment","Sur site, cloud privé ou Lobster Cloud":"On-premises, private cloud or Lobster Cloud","Haute disponibilité":"High availability","Bascule gérée par Lobster, sans équilibreur externe":"Failover handled by Lobster, no external load balancer","Évolutivité":"Scalability","Ajoutez des nœuds ou changez de taille, de M à 2XL":"Add nodes or change size, from M to 2XL","Mises à jour":"Updates","Sans interruption":"With no downtime","Le partenaire se configure lui-même.":"The partner sets up their own connection.","Un lien":"One link","Le partenaire choisit son protocole et saisit ses informations":"The partner picks their protocol and enters their details","Direct":"Direct","La configuration arrive dans la plateforme, sans ressaisie":"The configuration lands in the platform, no re-keying","Suivi":"Follow-up","L'équipe voit l'avancement, sans relancer":"The team sees progress, no chasing","Résultat":"Result","Des jours, pas des semaines":"Days, not weeks","Tous vos mondes de données, un seul outil.":"Every world of data, one tool.","Protocoles":"Protocols","AS2, AS4, Peppol, SFTP, Kafka, MQTT, OPC UA, SAP…":"AS2, AS4, Peppol, SFTP, Kafka, MQTT, OPC UA, SAP…","Formats":"Formats","EDIFACT, X12, IDoc, XML, JSON, CSV, PDF…":"EDIFACT, X12, IDoc, XML, JSON, CSV, PDF…","Tous les mondes":"Every world","Partenaires, ERP, IoT, big data, cloud hybride":"Partners, ERP, IoT, big data, hybrid cloud","Ancien et moderne":"Old and new","Une API REST peut alimenter un EDIFACT ou un IDoc SAP":"A REST API can feed an EDIFACT message or a SAP IDoc","Numérisez vos processus, au-dessus de l'intégration.":"Digitise your processes, on top of integration.","Sans code":"No code","Construisez vos applications métier en 3 niveaux":"Build your business apps in 3 tiers","Enrichir":"Enrich","Recherches en temps réel dans vos systèmes":"Real-time lookups in your systems","Décider":"Decide","Portails en libre-service, sans ticket IT":"Self-service portals, no IT ticket","Agents IA":"AI agents","Des portails construits à partir d'un prompt (préversion)":"Portals built from a prompt (preview)","Vos systèmes legacy, à portée de votre IA.":"Your legacy systems, within reach of your AI.","Standard ouvert":"Open standard","Lobster fait office de serveur MCP":"Lobster acts as an MCP server","Données en direct":"Live data","Pas de RAG, pas de lac de données":"No RAG, no data lake","Outils lisibles":"Readable tools","Chaque outil a un nom et une description":"Each tool has a name and a description","Sécurisé":"Secure","Mêmes règles d'accès que la plateforme":"Same access rules as the platform","On voit où ça casse, et pourquoi.":"See where it breaks, and why.","Phase en échec":"Failing phase","La cause est localisée : transport, structure ou logique":"The cause is located: transport, structure or logic","Un identifiant":"One ID","Un job parent relie tous les profils d'une transaction":"A parent job links every profile in a transaction","Carte vivante":"Living map","La Process Map montre les dépendances":"The Process Map shows the dependencies","Erreurs claires":"Clear errors","Pathfinder les explique en langage courant":"Pathfinder explains them in everyday language","L'IA propose, la plateforme décide.":"AI proposes, the platform decides.","Chemin imposé":"Enforced path","Toute action d'IA passe par les 6 phases":"Every AI action goes through the 6 phases","Contrôle central":"Central control","Droits, audit, masquage, validation humaine":"Rights, audit, masking, human approval","API sans code":"No-code APIs","Un profil devient un endpoint REST sécurisé":"A profile becomes a secure REST endpoint","Vos propres agents":"Your own agents","Construisent et exploitent Lobster via l'API de plateforme":"Build and operate Lobster through the platform API"});
 const T = s => (L==='en' && EN[s]!==undefined) ? EN[s] : s;
 function applyStatic(){
   document.querySelectorAll('[data-t]').forEach(el=>{ if(!el.dataset.fr) el.dataset.fr = el.innerHTML.trim(); el.innerHTML = T(el.dataset.fr); });
@@ -544,7 +579,8 @@ function renderExplanation(it){
   const story = it.story ? `<div class="story"><b>${esc(it.story.title)}</b><span>${esc(it.story.text)}</span></div>` : '';
   const vs = it.vs ? `<div class="compare vs"><div class="cmp"><h4>${esc(it.vs.blank[0])}</h4><ul>${it.vs.blank[1].map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div><div class="cmp after"><h4>${esc(it.vs.six[0])}</h4><ul>${it.vs.six[1].map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>` : '';
   const pf = it.pf ? `<div class="story pfbox"><b><span class="pftag">${svg('spark')}Pathfinder</span> ${esc('Dans ce différenciateur')}</b><span>${esc(it.pf)}</span></div>` : '';
-  $('p-expl').innerHTML = `<h3>${esc('Explication')}</h3><p class="pitch">${esc(it.pitch)}</p>${vs}<ul class="points">${pts}</ul>${pf}${story}${stats}${note}`;
+  const sh = it.short ? `<div class="short"><p class="hook">${esc(it.short.hook)}</p><ul class="spts">${it.short.pts.map(p=>`<li><b>${esc(p[0])}</b><span>${esc(p[1])}</span></li>`).join('')}</ul></div>` : '';
+  $('p-expl').innerHTML = `<h3>${esc('Explication')}</h3><p class="pitch">${esc(it.pitch)}</p>${sh}${vs}<ul class="points">${pts}</ul>${pf}${story}${stats}${note}`;
 }
 
 function renderDemo(it){
@@ -590,6 +626,7 @@ function show(){
   $('d-num').textContent = L==='en' ? `Differentiator ${i+1} of ${ITEMS.length}` : `Différenciateur ${i+1} sur ${ITEMS.length}`;
   $('d-title').textContent = T(it.title);
   $('d-sub').textContent = T(it.text);
+  $('d-pf').innerHTML = svg('spark') + 'Pathfinder'; $('d-pf').title = T(it.pf || '');
   renderExplanation(it); renderDemo(it);
   window.scrollTo(0,0);
 }
@@ -826,6 +863,16 @@ function closeDetail(){ const m=$('rm-modal'); if(m.style.display==='grid'){ m.s
 $('roadmap').addEventListener('click', e=>{ const li=e.target.closest('li[data-st]'); if(li) openDetail(li); });
 $('roadmap').addEventListener('keydown', e=>{ if((e.key==='Enter'||e.key===' ') && e.target.matches('li[data-st]')){ e.preventDefault(); openDetail(e.target); } });
 $('rm-modal').addEventListener('click', e=>{ if(e.target.id==='rm-modal' || e.target.closest('#m-x')) closeDetail(); });
+let M = 'pres';
+try{ M = localStorage.getItem('mode') === 'full' ? 'full' : 'pres'; }catch(e){}
+function setMode(m){
+  M = m; try{ localStorage.setItem('mode', m); }catch(e){}
+  document.documentElement.dataset.mode = m;
+  $('m-pres').setAttribute('aria-pressed', m==='pres'); $('m-full').setAttribute('aria-pressed', m==='full');
+  if(m==='pres' && rmTag!=='hot'){ rmTag='hot'; renderRoadmap(); }
+}
+$('m-pres').onclick = () => setMode('pres'); $('m-full').onclick = () => setMode('full');
+setMode(M);
 document.documentElement.lang = L;
 $('l-fr').setAttribute('aria-pressed', L==='fr'); $('l-en').setAttribute('aria-pressed', L==='en');
 applyStatic();
