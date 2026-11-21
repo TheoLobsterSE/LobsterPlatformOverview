@@ -44,6 +44,24 @@ header img{height:40px;display:block}
 .lang button[aria-pressed="true"]{background:var(--g500);color:var(--g900)}
 .lang button:not([aria-pressed="true"]):hover{background:var(--g800)}
 html[lang="en"] .fig::after{content:"Enlarge ⤢"}
+/* Slide roadmap */
+.rs-title{font:900 clamp(30px,3.6vw,52px)/1.1 var(--head);margin:32px 0 8px}
+.rs-title .g{color:var(--g500)}
+.rs-sub{font-weight:300;font-size:clamp(18px,1.7vw,24px);color:var(--g50)}
+.rs-chips{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:28px 0 24px}
+.rs-chip{display:flex;align-items:center;gap:16px;border:2px solid var(--g500);border-radius:24px;padding:16px 24px}
+.rs-chip .ri{width:44px;height:44px;flex:none}
+.rs-chip b{display:block;font:900 22px/1.2 var(--head);color:var(--g500)}
+.rs-chip span.s{font-size:17px;color:var(--g50)}
+.sfoot{font:300 14px/1.5 var(--body);color:var(--g200);margin:8px 0 0}
+html[data-mode="full"] .sfoot{display:none}
+html[data-mode="pres"] #rm-detail{display:none}
+html[data-mode="full"] #rm-detail{margin-top:48px;padding-top:32px;border-top:1px solid var(--g700)}
+@media (max-width:1100px){.rs-chips{grid-template-columns:1fr}}
+.shint{font-size:15px;color:var(--g200);margin:0 0 16px}
+.minc{list-style:none;display:grid;gap:8px;margin:0 0 24px}
+.minc li{position:relative;padding-left:20px;font-size:17px;line-height:1.35}
+.minc li::before{content:"";position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:999px;background:var(--g500)}
 /* Mode présentation : l'essentiel seulement */
 html[data-mode="pres"] .pitch,
 html[data-mode="pres"] .points span,
@@ -128,12 +146,12 @@ html[data-mode="pres"] .d-head p{font-size:24px}
 .rm-cols>div{background:var(--g800);border-radius:24px;padding:32px}
 .rm-cols .rm-list li{background:var(--g900);border-radius:12px;padding:12px 16px}
 .rm-list li.rm-empty{display:block;color:var(--g200);font-size:15px;background:none}
-.rm-list li[data-st]{cursor:pointer;transition:background .2s,transform .2s}
-.rm-list li[data-st]::after{content:"›";margin-left:auto;font:700 22px var(--body);color:var(--g200);opacity:.5;transition:transform .2s,opacity .2s}
-.rm-list li[data-st]:hover::after,.rm-list li[data-st]:focus-visible::after{opacity:1;transform:translateX(4px);color:var(--g500)}
-.rm-cols .rm-list li[data-st]:hover{background:var(--g950)}
-.ver .rm-list li[data-st]{padding:6px 8px;margin:0 -8px;border-radius:12px}
-.ver .rm-list li[data-st]:hover{background:var(--g900)}
+.rm-list li[data-grp]{cursor:pointer;transition:background .2s,transform .2s}
+.rm-list li[data-grp]::after{content:"›";margin-left:auto;font:700 22px var(--body);color:var(--g200);opacity:.5;transition:transform .2s,opacity .2s}
+.rm-list li[data-grp]:hover::after,.rm-list li[data-grp]:focus-visible::after{opacity:1;transform:translateX(4px);color:var(--g500)}
+.rm-cols .rm-list li[data-grp]:hover{background:var(--g950)}
+.ver .rm-list li[data-grp]{padding:6px 8px;margin:0 -8px;border-radius:12px}
+.ver .rm-list li[data-grp]:hover{background:var(--g900)}
 .hint{font-size:15px;color:var(--g200);margin:-16px 0 32px}
 #rm-modal{position:fixed;inset:0;background:rgba(0,46,33,.92);display:none;place-items:center;padding:24px;z-index:11}
 .mcard{background:var(--g800);border-radius:24px;border-top:4px solid var(--g500);padding:40px;max-width:720px;width:100%;position:relative;animation:rise .25s ease both}
@@ -284,24 +302,8 @@ footer{margin-top:auto;padding-top:32px}
 
     <section id="roadmap">
       <button class="back" id="rm-back" data-t>← Tous les différenciateurs</button>
-      <div class="d-head">
-        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/><path d="M6 10V6M12 10V4M18 10V7"/></svg></div>
-        <div>
-          <small data-t>Roadmap produit</small>
-          <h2 data-t>Une plateforme qui avance vite</h2>
-          <p data-t>L'IA, MCP et les agents en tête. Sélection tirée de la roadmap publique de Lobster.</p>
-        </div>
-      </div>
-      <div class="chips" id="rm-chips" role="group" aria-label="Filtrer par thème"></div>
-      <p class="hint" data-t>Cliquez sur un élément pour en savoir plus.</p>
-      <h3 class="rm-h"><span class="pill done" data-t>✓ Livré</span> <span data-t>version par version</span></h3>
-      <div class="rm-versions" id="rm-released"></div>
-      <div class="rm-cols">
-        <div><h3 class="rm-h"><span class="pill done" data-t>✓ Disponible</span> <span data-t>maintenant</span></h3><ul class="rm-list" id="rm-wip"></ul></div>
-        <div><h3 class="rm-h"><span class="pill wip" data-t>En développement</span> <span data-t>à venir</span></h3><ul class="rm-list" id="rm-uc"></ul></div>
-      </div>
-      <p class="note" data-t>Source : roadmap produit publique de Lobster (lobstersoftware.com/en/data-platform/product-roadmap), consultée le 17.11.2026. Sélection et traduction par nos soins ; les statuts « disponible maintenant » et « en développement » ont été ajustés par rapport à la roadmap publique. Les éléments en développement sont indicatifs et peuvent évoluer. Les résumés sont rédigés d'après les descriptions de cette roadmap.</p>
-    </section>
+      <div id="rm-slide"></div>
+      </section>
 
     <section id="detail" aria-live="polite">
       <button class="back" id="back" data-t>← Tous les différenciateurs</button>
@@ -546,11 +548,39 @@ Object.assign(EN, {"99,5 %":"99.5%","99,95 %":"99.95%","SLA, infrastructure stan
 Object.assign(EN, {"Réunit EDI, EAI, API et ETL dans un seul outil visuel":"Bringing EDI, EAI, API and ETL together in one visual tool","Un onboarding plus rapide, sans gros projet IT":"Supporting faster onboarding without requiring a major IT project","Prise en charge native des principaux standards et protocoles":"Native support for all major standards and protocols","Supervision centralisée et alertes proactives":"Central monitoring and proactive alerts"});
 Object.assign(EN, {"Présentation":"Presenter","Détail":"Detailed"});
 Object.assign(EN, {"Une seule façon de construire : 6 phases, partout.":"One way to build: 6 phases, everywhere.","Lisible":"Readable","Chaque intégration se lit d'un coup d'œil":"Every integration reads at a glance","Maintenable":"Maintainable","La phase en échec nomme la panne":"The failing phase names the fault","Réutilisable":"Reusable","On passe d'AS2 à REST sans toucher au mappage":"Swap AS2 for REST without touching the mapping","Gouverné":"Governed","Journalisation et règles liées aux phases":"Logging and rules tied to the phases","Performant":"Performant","Un EDIFACT lourd vers un IDoc SAP, sans toile de fils":"Heavy EDIFACT to SAP IDoc, no web of wires","Déployez où vous voulez, montez en charge sans refonte.":"Deploy anywhere, scale without a rebuild.","Déploiement":"Deployment","Sur site, cloud privé ou Lobster Cloud":"On-premises, private cloud or Lobster Cloud","Haute disponibilité":"High availability","Bascule gérée par Lobster, sans équilibreur externe":"Failover handled by Lobster, no external load balancer","Évolutivité":"Scalability","Ajoutez des nœuds ou changez de taille, de M à 2XL":"Add nodes or change size, from M to 2XL","Mises à jour":"Updates","Sans interruption":"With no downtime","Le partenaire se configure lui-même.":"The partner sets up their own connection.","Un lien":"One link","Le partenaire choisit son protocole et saisit ses informations":"The partner picks their protocol and enters their details","Direct":"Direct","La configuration arrive dans la plateforme, sans ressaisie":"The configuration lands in the platform, no re-keying","Suivi":"Follow-up","L'équipe voit l'avancement, sans relancer":"The team sees progress, no chasing","Résultat":"Result","Des jours, pas des semaines":"Days, not weeks","Tous vos mondes de données, un seul outil.":"Every world of data, one tool.","Protocoles":"Protocols","AS2, AS4, Peppol, SFTP, Kafka, MQTT, OPC UA, SAP…":"AS2, AS4, Peppol, SFTP, Kafka, MQTT, OPC UA, SAP…","Formats":"Formats","EDIFACT, X12, IDoc, XML, JSON, CSV, PDF…":"EDIFACT, X12, IDoc, XML, JSON, CSV, PDF…","Tous les mondes":"Every world","Partenaires, ERP, IoT, big data, cloud hybride":"Partners, ERP, IoT, big data, hybrid cloud","Ancien et moderne":"Old and new","Une API REST peut alimenter un EDIFACT ou un IDoc SAP":"A REST API can feed an EDIFACT message or a SAP IDoc","Numérisez vos processus, au-dessus de l'intégration.":"Digitise your processes, on top of integration.","Sans code":"No code","Construisez vos applications métier en 3 niveaux":"Build your business apps in 3 tiers","Enrichir":"Enrich","Recherches en temps réel dans vos systèmes":"Real-time lookups in your systems","Décider":"Decide","Portails en libre-service, sans ticket IT":"Self-service portals, no IT ticket","Agents IA":"AI agents","Des portails construits à partir d'un prompt (préversion)":"Portals built from a prompt (preview)","Vos systèmes legacy, à portée de votre IA.":"Your legacy systems, within reach of your AI.","Standard ouvert":"Open standard","Lobster fait office de serveur MCP":"Lobster acts as an MCP server","Données en direct":"Live data","Pas de RAG, pas de lac de données":"No RAG, no data lake","Outils lisibles":"Readable tools","Chaque outil a un nom et une description":"Each tool has a name and a description","Sécurisé":"Secure","Mêmes règles d'accès que la plateforme":"Same access rules as the platform","On voit où ça casse, et pourquoi.":"See where it breaks, and why.","Phase en échec":"Failing phase","La cause est localisée : transport, structure ou logique":"The cause is located: transport, structure or logic","Un identifiant":"One ID","Un job parent relie tous les profils d'une transaction":"A parent job links every profile in a transaction","Carte vivante":"Living map","La Process Map montre les dépendances":"The Process Map shows the dependencies","Erreurs claires":"Clear errors","Pathfinder les explique en langage courant":"Pathfinder explains them in everyday language","L'IA propose, la plateforme décide.":"AI proposes, the platform decides.","Chemin imposé":"Enforced path","Toute action d'IA passe par les 6 phases":"Every AI action goes through the 6 phases","Contrôle central":"Central control","Droits, audit, masquage, validation humaine":"Rights, audit, masking, human approval","API sans code":"No-code APIs","Un profil devient un endpoint REST sécurisé":"A profile becomes a secure REST endpoint","Vos propres agents":"Your own agents","Construisent et exploitent Lobster via l'API de plateforme":"Build and operate Lobster through the platform API"});
+Object.assign(EN, {
+"Roadmap produit : ":"Product roadmap: ",
+"l'IA intégrée":"AI built in",
+", gouvernée dès la conception":", governed by design",
+"Où va Lobster Data Platform, et ce que vous pouvez utiliser dès aujourd'hui":"Where Lobster Data Platform is heading, and what you can use today",
+"L'IA dans la plateforme":"AI inside the platform",
+"Pathfinder et agents IA, là où vous construisez":"Pathfinder and AI agents, where you build",
+"Ouverte à votre IA":"Open to your AI",
+"MCP et API de plateforme pour vos propres agents":"MCP and platform API for your own agents",
+"Gouvernée dès la conception":"Governed by design",
+"Droits, audit, conformité et e-facturation":"Rights, audit, compliance and e-invoicing",
+"✓ Disponible maintenant":"✓ Available now",
+"Ce que vous utilisez aujourd'hui":"What you can use today",
+"Ce qui arrive ensuite":"What is coming next",
+"Copilote Pathfinder : automapping (EDIFACT inclus), aide JSONPath, XPath et RegEx":"Pathfinder copilot: auto-mapping (including EDIFACT), JSONPath, XPath and regex help",
+"Erreurs expliquées en langage clair, dans le Control Center et les logs":"Errors explained in plain language, in the Control Center and logs",
+"Agents IA Lobster : créez et exécutez des agents dans vos chaînes de profils":"Lobster AI Agents: build and run agents inside your profile chains",
+"MCP : exposez vos systèmes aux assistants IA, aussi dans Trading Partner Manager":"MCP: expose your systems to AI assistants, also in Trading Partner Manager",
+"E-facturation : Peppol, KSeF (Pologne), XRechnung, ZUGFeRD / Factur‑X":"E-invoicing: Peppol, KSeF (Poland), XRechnung, ZUGFeRD / Factur‑X",
+"Onboarding, certificats, mises à jour et portail cloud en libre-service":"Self-service onboarding, certificates, platform updates and cloud portal",
+"Traitement de commandes par l'IA dans Trading Partner Manager":"AI order processing in Trading Partner Manager",
+"Expliquer n'importe quel mapping en langage naturel, plus un journal des modifications par l'IA":"Explain any mapping in natural language, plus an AI profile changelog",
+"Structures générées par l'IA pour CSV et FixRecord":"AI-generated structures for CSV and FixRecord",
+"Process Map : supervision et dépannage en temps réel":"Process Map: real-time monitoring and troubleshooting",
+"Validation des jetons OIDC / Entra ID pour les API publiées":"OIDC / Entra ID token validation for published APIs",
+"Lobster Bridge pour REST et SOAP, import Postman, meilleur support d'OData":"Lobster Bridge for REST and SOAP, Postman import, better OData",
+"Source : roadmap produit publique de Lobster (lobstersoftware.com), consultée le 17.11.2026. Sélection par nos soins ; statuts ajustés par rapport à la roadmap publique. Les éléments en développement sont indicatifs et peuvent évoluer.":"Source: Lobster public product roadmap (lobstersoftware.com), accessed 17 Nov 2026. Selection by us; statuses adjusted from the public roadmap. Items in development are indicative and may change."
+});
+Object.assign(EN, {"Inclut":"Includes"});
 const T = s => (L==='en' && EN[s]!==undefined) ? EN[s] : s;
 function applyStatic(){
   document.querySelectorAll('[data-t]').forEach(el=>{ if(!el.dataset.fr) el.dataset.fr = el.innerHTML.trim(); el.innerHTML = T(el.dataset.fr); });
   document.title = T('Les différenciateurs Lobster');
-  document.getElementById('rm-chips').setAttribute('aria-label', T('Filtrer par thème'));
   document.getElementById('lightbox').setAttribute('aria-label', T('Image agrandie'));
 }
 const svg = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>`;
@@ -651,118 +681,55 @@ $('lb-stage').onclick = e => { if(e.target.id==='lb-stage') closeLb(); };
 const toHome = ()=>{ history.pushState('',document.title,location.pathname); show(); };
 $('back').onclick = toHome; $('rm-back').onclick = toHome;
 
-/* Roadmap : sélection et traduction depuis la roadmap publique de Lobster (consultée le 17.11.2026). */
-const TAGS = {hot:'À la une', ia:'IA & Pathfinder', agents:'Agents & MCP', api:'API & connecteurs', efact:'E-facturation', partners:'Partenaires', gov:'Gouvernance & exploitation'};
-const RM = {
-  released:[
-    ['25.0',[
-      ['Intégration et orchestration réunies dans une seule plateforme','api'],
-      ['Support IA élargi, avec Amazon Bedrock','ia'],
-      ['Lobster Bridge : du site vers le cloud','api'],
-      ['Modèles pour les Data Apps','api'],
-      ['Authentification à deux facteurs, SSO et LDAP améliorés','gov']]],
-    ['25.1',[
-      ['Support MCP pour les systèmes clients','agents'],
-      ['Pathfinder : journal d\'erreurs lisible, généré par l\'IA','ia'],
-      ['Pathfinder : recherche de fonctions assistée par l\'IA','ia'],
-      ['Point d\'accès Peppol pour la facturation électronique','efact'],
-      ['Connecteur Courrier, Express & Colis (CEP)','api'],
-      ['Collaboration entre partenaires via WebEDI','partners']],'LTS'],
-    ['26.1',[
-      ['Pathfinder : du langage naturel au SQL','ia'],
-      ['Pathfinder : générateur de syntaxe cron','ia'],
-      ['Onboarding des partenaires automatisé, en libre-service','partners'],
-      ['API Manager avancé pour REST','api'],
-      ['Intégration d\'outils d\'observabilité tiers','gov'],
-      ['Visualisation des chaînes de profils','gov']]],
-    ['26.2',[
-      ['Publication d\'API REST avec contrôle d\'accès fin','api'],
-      ['Versioning d\'API et dépréciation tenant compte des partenaires','api'],
-      ['Pathfinder Copilot : aide pour les expressions régulières','ia'],
-      ['Coffre-fort d\'entreprise pour les certificats','gov'],
-      ['Certificats gérés en libre-service par les partenaires','partners']]],
-    ['26.3',[
-      ['Génération de mappings par l\'IA avec Pathfinder','ia'],
-      ['Pathfinder : journal d\'erreurs lisible dans l\'aperçu des logs','ia'],
-      ['Export et partage de la Process Map','gov'],
-      ['Portail libre-service de gestion de l\'infrastructure cloud','gov'],
-      ['Configuration gérée depuis l\'interface','gov']]],
-    ['26.4',[
-      ['Pathfinder : copilote d\'automapping des transformations','ia'],
-      ['Pathfinder Copilot : JSONPath et XPath','ia'],
-      ['Trading Partner Manager : API et accès au serveur MCP','agents'],
-      ['Conformité KSeF pour la facturation B2B en Pologne','efact'],
-      ['Validation e-facture : XRechnung, BIS Billing, ZUGFeRD / Factur-X','efact'],
-      ['Gestion des droits et des rôles simplifiée','gov'],
-      ['Mises à jour de la plateforme en libre-service','gov']],'LTS']
+/* Slide roadmap : direction + principales fonctions (disponible / en développement) */
+const SLIDE = {
+  title:['Roadmap produit : ',"l'IA intégrée",', gouvernée dès la conception'],
+  sub:"Où va Lobster Data Platform, et ce que vous pouvez utiliser dès aujourd'hui",
+  chips:[
+    ['spark','t-ia',"L'IA dans la plateforme",'Pathfinder et agents IA, là où vous construisez'],
+    ['robot','t-agents','Ouverte à votre IA','MCP et API de plateforme pour vos propres agents'],
+    ['shield','t-gov','Gouvernée dès la conception','Droits, audit, conformité et e-facturation']
   ],
-  wip:[
-    ['Agents IA Lobster','agents'],
-    ['Pathfinder : interface conversationnelle','ia'],
-    ['Pathfinder : automapping pour EDIFACT','ia'],
-    ['Pathfinder : analyse des traces d\'erreur par l\'IA','ia'],
-    ['Lobster.md : base de connaissances client','ia'],
-    ['Traitement de documents non structurés','ia'],
-    ['Process Map : interactivité et navigation renforcées','gov'],
-    ['Gestion des changements et audit avancés','gov'],
-    ['Permissions plus fines (profils, macros, configuration)','gov'],
-    ['Documentation générée pour les chaînes de profils','gov'],
-    ['API REST pour les logs et les jobs de profils','api'],
-    ['Connecteur DPD (courrier, express, colis)','api'],
-    ['Peppol : formats logistiques et Norvège','efact'],
-    ['E-facturation : Slovaquie 2027','efact'],
-    ['ZUGFeRD : génération de factures depuis XML','efact'],
-    ['Trading Partner Manager : domaine propre au client','partners'],
-    ['Trading Partner Manager : multi-tenant pour les partenaires','partners']
+  nowTitle:"Ce que vous utilisez aujourd'hui", devTitle:'Ce qui arrive ensuite',
+  now:[
+    ['ia','Copilote Pathfinder : automapping (EDIFACT inclus), aide JSONPath, XPath et RegEx'],
+    ['ia','Erreurs expliquées en langage clair, dans le Control Center et les logs'],
+    ['agents','Agents IA Lobster : créez et exécutez des agents dans vos chaînes de profils'],
+    ['agents','MCP : exposez vos systèmes aux assistants IA, aussi dans Trading Partner Manager'],
+    ['efact','E-facturation : Peppol, KSeF (Pologne), XRechnung, ZUGFeRD / Factur‑X'],
+    ['partners','Onboarding, certificats, mises à jour et portail cloud en libre-service']
   ],
-  uc:[
-    ['Traitement de commandes par l\'IA dans Trading Partner Manager','partners'],
-    ['Modèle de flux : réception et validation de commandes par l\'IA','ia'],
-    ['Pathfinder : journal des modifications d\'un profil','ia'],
-    ['Pathfinder : explications d\'erreurs dans le Data Cockpit','ia'],
-    ['Expliquer un mapping existant en langage naturel','ia'],
-    ['Pathfinder : structures générées pour CSV et FixRecord','ia'],
-    ['Mode simple ou expert pour l\'intégration','gov'],
-    ['Validation des jetons OIDC / Entra ID pour les API publiées','gov'],
-    ['Lobster Bridge : connectivité REST et SOAP','api'],
-    ['Import de collections Postman','api'],
-    ['Meilleur support d\'OData','api'],
-    ['Migration du site vers Lobster Cloud pour Trading Partner Manager','partners'],
-    ['Process Map : supervision en temps réel','gov']
-  ]
+  dev:[
+    ['agents',"Traitement de commandes par l'IA dans Trading Partner Manager"],
+    ['ia',"Expliquer n'importe quel mapping en langage naturel, plus un journal des modifications par l'IA"],
+    ['ia',"Structures générées par l'IA pour CSV et FixRecord"],
+    ['gov','Process Map : supervision et dépannage en temps réel'],
+    ['gov','Validation des jetons OIDC / Entra ID pour les API publiées'],
+    ['api',"Lobster Bridge pour REST et SOAP, import Postman, meilleur support d'OData"]
+  ],
+  foot:"Source : roadmap produit publique de Lobster (lobstersoftware.com), consultée le 17.11.2026. Sélection par nos soins ; statuts ajustés par rapport à la roadmap publique. Les éléments en développement sont indicatifs et peuvent évoluer."
 };
-/* « À la une » : les points les plus marquants, surtout IA et MCP. */
-const HOT = new Set([
-  'Intégration et orchestration réunies dans une seule plateforme','Support IA élargi, avec Amazon Bedrock',
-  'Support MCP pour les systèmes clients','Pathfinder : journal d\'erreurs lisible, généré par l\'IA',
-  'Pathfinder : du langage naturel au SQL','Onboarding des partenaires automatisé, en libre-service',
-  'Pathfinder Copilot : aide pour les expressions régulières',
-  'Génération de mappings par l\'IA avec Pathfinder',
-  'Pathfinder : copilote d\'automapping des transformations','Pathfinder Copilot : JSONPath et XPath','Trading Partner Manager : API et accès au serveur MCP',
-  'Agents IA Lobster','Pathfinder : interface conversationnelle','Pathfinder : automapping pour EDIFACT','Lobster.md : base de connaissances client','Traitement de documents non structurés','Pathfinder : analyse des traces d\'erreur par l\'IA',
-  'Traitement de commandes par l\'IA dans Trading Partner Manager','Modèle de flux : réception et validation de commandes par l\'IA','Expliquer un mapping existant en langage naturel','Pathfinder : explications d\'erreurs dans le Data Cockpit'
-]);
-let rmTag = 'hot';
-function renderRoadmap(){
-  const ok = x => rmTag==='hot' ? HOT.has(x[0]) : x[1]===rmTag;
-  $('rm-chips').innerHTML = Object.entries(TAGS).map(([k,v])=>`<button data-tag="${k}" aria-pressed="${k===rmTag}">${esc(v)}</button>`).join('');
-  const li = (x,st,ver) => `<li class="t-${x[1]}" tabindex="0" role="button" data-k="${esc(x[0]).replace(/"/g,'&quot;')}" data-fr="${x[0].replace(/"/g,'&quot;')}" data-st="${st}" data-v="${ver||''}"><span class="ri">${svg(TAGICON[x[1]])}</span><span>${esc(x[0])}</span></li>`;
-  $('rm-released').innerHTML = RM.released.map(([v,items,lts])=>{
-    const vis = items.filter(ok); if(!vis.length) return '';
-    return `<div class="ver"><h4>${esc(v)}${lts?` <em>${lts}</em>`:''}</h4><ul class="rm-list">${vis.map(x=>li(x,'rel',v+(lts?' '+lts:''))).join('')}</ul></div>`;
-  }).join('') || `<p class="rm-empty">${T('Rien dans ce thème pour le moment.')}</p>`;
-  const list = (a,st) => { const v=a.filter(ok); return v.length ? v.map(x=>li(x,st)).join('') : `<li class="rm-empty">${T('Rien dans ce thème pour le moment.')}</li>`; };
-  $('rm-wip').innerHTML = list(RM.wip,'now'); $('rm-uc').innerHTML = list(RM.uc,'dev');
+function renderSlide(){
+  const li = grp => (x,i) => `<li class="t-${x[0]}" tabindex="0" role="button" data-grp="${grp}" data-i="${i}" data-tag="${x[0]}" data-fr="${x[1].replace(/"/g,'&quot;')}"><span class="ri">${svg(TAGICON[x[0]])}</span><span>${esc(x[1])}</span></li>`;
+  $('rm-slide').innerHTML =
+    `<h2 class="rs-title">${esc(SLIDE.title[0])}<span class="g">${esc(SLIDE.title[1])}</span>${esc(SLIDE.title[2])}</h2>`+
+    `<p class="rs-sub">${esc(SLIDE.sub)}</p>`+
+    `<div class="rs-chips">${SLIDE.chips.map(c=>`<div class="rs-chip ${c[1]}"><span class="ri">${svg(c[0])}</span><div><b>${esc(c[2])}</b><span class="s">${esc(c[3])}</span></div></div>`).join('')}</div>`+
+    `<p class="shint">${esc('Cliquez sur un élément pour en savoir plus.')}</p>`+
+    `<div class="rm-cols">`+
+      `<div><h3 class="rm-h"><span class="pill done">${esc('✓ Disponible maintenant')}</span>${esc(SLIDE.nowTitle)}</h3><ul class="rm-list">${SLIDE.now.map(li('now')).join('')}</ul></div>`+
+      `<div><h3 class="rm-h"><span class="pill wip">${esc('En développement')}</span>${esc(SLIDE.devTitle)}</h3><ul class="rm-list">${SLIDE.dev.map(li('dev')).join('')}</ul></div>`+
+    `</div>`+
+    `<p class="sfoot">${esc(SLIDE.foot)}</p>`;
 }
-$('rm-chips').addEventListener('click', e=>{ const b=e.target.closest('[data-tag]'); if(b){ rmTag=b.dataset.tag; renderRoadmap(); } });
-renderRoadmap();
+renderSlide();
 
 function setLang(l){
   L = l; try{ localStorage.setItem('lang', l); }catch(e){}
   closeDetail();
   document.documentElement.lang = l;
   applyStatic();
-  renderGrid(); renderRoadmap(); show();
+  renderGrid(); renderSlide(); show();
   $('l-fr').setAttribute('aria-pressed', l==='fr'); $('l-en').setAttribute('aria-pressed', l==='en');
 }
 $('l-fr').onclick = () => setLang('fr'); $('l-en').onclick = () => setLang('en');
@@ -778,90 +745,25 @@ addEventListener('keydown', e=>{
   if(e.key==='ArrowLeft')  go(cur()-1);
   if(e.key==='Escape')     $('back').click();
 });
-const DET = {
-"Intégration et orchestration réunies dans une seule plateforme":["Intégration et orchestration vivent dans la même plateforme : même les tâches qui demandent une intervention humaine peuvent être automatisées.","Une seule plateforme et une seule expérience, du flux de données au processus métier.","Integration and orchestration live in the same platform, so even tasks that need a human step can be automated.","One platform and one experience, from data flow to business process."],
-"Support IA élargi, avec Amazon Bedrock":["Les fonctions de la phase 3 du mappage s'appuyaient sur ChatGPT (OpenAI). Elles peuvent désormais aussi utiliser Amazon Bedrock.","Plus de choix pour le fournisseur d'IA.","Phase 3 mapping functions already supported ChatGPT (OpenAI). They can now use Amazon Bedrock too.","More choice of AI provider."],
-"Lobster Bridge : du site vers le cloud":["Un pont sécurisé entre les systèmes sur site et le cloud, pour les environnements hybrides.","Idéal pour les organisations qui combinent systèmes sur site et solutions cloud.","A secure bridge between on-premises systems and the cloud, built for hybrid environments.","Ideal for organisations that combine on-premises systems and cloud solutions."],
-"Modèles pour les Data Apps":["Des modèles prêts à l'emploi pour démarrer rapidement avec les Data Apps.","On part d'un cas d'usage courant, pas d'une page blanche.","Ready-made templates to get started quickly with Data Apps.","You start from a common use case, not a blank page."],
-"Authentification à deux facteurs, SSO et LDAP améliorés":["Authentification à deux facteurs à la connexion, et prise en charge d'OAuth2 pour le SSO et LDAP.","Une sécurité renforcée, qui s'adapte aux exigences de chaque client.","Two-factor authentication at login, and OAuth2 support for SSO and LDAP.","Stronger security that adapts to each customer's requirements."],
-"Support MCP pour les systèmes clients":["Vos connexions existantes deviennent des ressources accessibles à l'IA grâce au Model Context Protocol (MCP).","Les données des anciens systèmes, souvent verrouillées, rejoignent les processus modernes.","Your existing connections become AI-accessible resources through the Model Context Protocol (MCP).","Data in legacy systems, often locked away, joins modern workflows."],
-"Pathfinder : journal d'erreurs lisible, généré par l'IA":["Dans le Control Center, Pathfinder transforme les messages d'erreur techniques en explications compréhensibles.","Moins de confusion, moins de tickets de support.","In the Control Center, Pathfinder turns technical error messages into explanations anyone can follow.","Less confusion, fewer support tickets."],
-"Pathfinder : recherche de fonctions assistée par l'IA":["On cherche une fonction de transformation par intention (« couper un texte », « supprimer les doublons ») plutôt que par son nom exact.","Inutile de connaître les noms de fonctions par cœur.","Search for a transformation function by intent (\"split text\", \"remove duplicates\") rather than by its exact name.","No need to memorise function names."],
-"Point d'accès Peppol pour la facturation électronique":["Lobster devient point d'accès Peppol officiel pour la facturation électronique.","Vous restez conforme aux évolutions réglementaires sans en gérer la complexité.","Lobster becomes an official Peppol Access Point for e-invoicing.","You stay compliant with changing regulations without managing the complexity yourself."],
-"Connecteur Courrier, Express & Colis (CEP)":["Un connecteur unique pour plusieurs transporteurs de courrier, express et colis.","Une seule connexion à configurer, au lieu de dizaines de connexions sur mesure.","A single connector for several courier, express and parcel providers.","One connection to configure instead of dozens of one-off integrations."],
-"Collaboration entre partenaires via WebEDI":["Un accès web pour les partenaires qui n'ont ni EDI ni API, par exemple pour confirmer des commandes ou des expéditions.","Même les partenaires les moins équipés rejoignent vos flux.","A web access for partners who have neither EDI nor API, for example to confirm orders or shipments.","Even the least equipped partners can join your flows."],
-"Pathfinder : du langage naturel au SQL":["Pathfinder écrit la requête SQL à partir d'une question en langage courant.","Les équipes métier interrogent les données sans connaître SQL.","Pathfinder writes the SQL query from a question in everyday language.","Business teams can query data without knowing SQL."],
-"Pathfinder : générateur de syntaxe cron":["Pathfinder génère la syntaxe cron à partir d'une description du planning voulu.","Moins d'erreurs de planification et d'automatisations qui échouent.","Pathfinder generates the cron syntax from a description of the schedule you want.","Fewer scheduling errors and failed automations."],
-"Onboarding des partenaires automatisé, en libre-service":["Les partenaires s'intègrent eux-mêmes via un processus automatisé, au lieu d'échanges de courriels qui durent des semaines.","Un onboarding qui se compte en jours, pas en semaines.","Partners onboard themselves through an automated process, instead of email exchanges that take weeks.","Onboarding measured in days, not weeks."],
-"API Manager avancé pour REST":["Contrôle d'accès, protection contre les abus et fiabilité du service pour les API REST utilisées par de nombreux partenaires.","Vous maîtrisez qui appelle quoi, et à quel rythme.","Access control, abuse protection and service reliability for REST APIs used by many partners.","You control who calls what, and how often."],
-"Intégration d'outils d'observabilité tiers":["Connexion aux outils de supervision que vous utilisez déjà, comme New Relic, Datadog ou Grafana.","Lobster apparaît dans la même vue que le reste de votre infrastructure.","Connects to the monitoring tools you already use, such as New Relic, Datadog or Grafana.","Lobster shows up in the same view as the rest of your infrastructure."],
-"Visualisation des chaînes de profils":["Une visualisation des chaînes de profils, ces ensembles de profils reliés entre eux.","On comprend d'un coup d'œil des intégrations complexes et réutilisables.","A visualisation of profile chains, the interconnected sets of profiles used in complex setups.","You grasp complex, reusable integrations at a glance."],
-"Publication d'API REST avec contrôle d'accès fin":["Gestion fine des accès aux API publiées pour plusieurs partenaires, sans perdre en souplesse d'exploitation.","Sécurité et flexibilité, partenaire par partenaire.","Fine-grained access management for published APIs across several partners, without losing operational flexibility.","Security and flexibility, partner by partner."],
-"Versioning d'API et dépréciation tenant compte des partenaires":["Contrôle des versions d'API et gestion de la dépréciation : les partenaires sont prévenus automatiquement quand une nouvelle version est disponible.","Vos API évoluent sans surprendre vos partenaires.","API version control and deprecation management: partners are notified automatically when a newer version is available.","Your APIs evolve without surprising your partners."],
-"Pathfinder Copilot : aide pour les expressions régulières":["Pathfinder aide à créer et à déboguer les expressions régulières.","Moins de temps perdu sur les motifs complexes.","Pathfinder helps create and debug regular expressions.","Less time lost on complex patterns."],
-"Coffre-fort d'entreprise pour les certificats":["Le coffre-fort d'entreprise, déjà utilisé pour les mots de passe depuis la version 26.1, gère désormais aussi les certificats.","Tous les identifiants sensibles dans un même lieu sécurisé.","The enterprise vault, already used for passwords since version 26.1, now handles certificates as well.","All sensitive credentials in one secure place."],
-"Certificats gérés en libre-service par les partenaires":["Les partenaires renouvellent ou remplacent eux-mêmes leurs certificats, sans ouvrir de ticket.","Moins de dépendance vis-à-vis du service IT.","Partners renew or replace their own certificates without opening a ticket.","Less dependence on the IT team."],
-"Génération de mappings par l'IA avec Pathfinder":["Pathfinder génère le mappage entre des formats comme XML, JSON ou EDI, au lieu d'une configuration manuelle longue et sujette aux erreurs.","Des intégrations livrées plus vite.","Pathfinder generates the mapping between formats such as XML, JSON or EDI, instead of a long, error-prone manual setup.","Integrations delivered faster."],
-"Pathfinder : journal d'erreurs lisible dans l'aperçu des logs":["Les explications d'erreurs de Pathfinder sont disponibles directement dans l'aperçu des logs.","On comprend l'erreur sans quitter la page.","Pathfinder's error explanations are available right in the Logs Overview.","You understand the error without leaving the page."],
-"Export et partage de la Process Map":["Export de la Process Map en PDF, PNG ou SVG, en un clic.","Documentation, rapports et échanges avec les parties prenantes facilités.","Export the Process Map as PDF, PNG or SVG in one click.","Easier documentation, reporting and stakeholder communication."],
-"Portail libre-service de gestion de l'infrastructure cloud":["Les clients Lobster Cloud gèrent eux-mêmes les tâches d'infrastructure de base, comme les redémarrages de serveur ou les règles de pare-feu.","Plus d'attente d'un ticket de support.","Lobster Cloud customers handle basic infrastructure tasks themselves, such as server restarts and firewall changes.","No more waiting for a support ticket."],
-"Configuration gérée depuis l'interface":["La configuration du système se fait depuis l'interface, sans modifier de fichiers XML ni redémarrer les serveurs.","Moins de risques et moins d'interruptions.","System configuration is managed from the interface, with no XML file editing or server restarts.","Lower risk and less downtime."],
-"Pathfinder : copilote d'automapping des transformations":["Au-delà de la correspondance des champs, Pathfinder génère les chaînes de fonctions qui transforment les données de la source vers la cible.","Le mappage complet, pas seulement la moitié du travail.","Beyond matching fields, Pathfinder generates the function chains that transform data from source to target.","The whole mapping, not just half the work."],
-"Pathfinder Copilot : JSONPath et XPath":["Pathfinder aide à écrire les expressions JSONPath et XPath qui servent à interroger JSON et XML.","Des requêtes justes, sans tâtonnements.","Pathfinder helps write the JSONPath and XPath expressions used to query JSON and XML.","Correct queries without trial and error."],
-"Trading Partner Manager : API et accès au serveur MCP":["Le Trading Partner Manager expose des API utilisables à distance, compatibles avec les serveurs MCP.","Les assistants IA peuvent interagir avec le gestionnaire de partenaires.","The Trading Partner Manager exposes APIs for remote use, including compatibility with MCP servers.","AI assistants can interact with the partner manager."],
-"Conformité KSeF pour la facturation B2B en Pologne":["Connexion au système polonais de facturation électronique KSeF. À partir du 1er janvier 2027, l'authentification par signature XAdES devient le seul moyen de s'y connecter.","Prêt pour la Pologne avant l'échéance.","Connects to Poland's national e-invoicing system, KSeF. From 1 January 2027, XAdES signature authentication becomes the only way to connect.","Ready for Poland before the deadline."],
-"Validation e-facture : XRechnung, BIS Billing, ZUGFeRD / Factur-X":["Des packages de validation pour XRechnung 3.0.2, BIS Billing 3.0 et ZUGFeRD 2.5 / Factur-X 1.09, pour vérifier la conformité d'une facture avant son traitement.","Moins de factures rejetées.","Validation packages for XRechnung 3.0.2, BIS Billing 3.0 and ZUGFeRD 2.5 / Factur-X 1.09, to check an invoice's compliance before processing.","Fewer rejected invoices."],
-"Gestion des droits et des rôles simplifiée":["Un système de rôles simplifié, fondé sur des profils prédéfinis et documentés.","Attribuer les droits devient plus intuitif et plus rapide.","A streamlined role system built around predefined, documented personas.","Assigning permissions becomes more intuitive and faster."],
-"Mises à jour de la plateforme en libre-service":["À partir de la version 26.4, les mises à jour de la plateforme se font en libre-service, en mode rolling upgrade, sans ouvrir de ticket.","Une maintenance courante sans délai ni dépendance au support.","From version 26.4, platform updates are self-service rolling upgrades, with no support ticket needed.","Routine maintenance without delay or dependence on support."],
-"Agents IA Lobster":["Créez, configurez et déployez des agents IA dans la plateforme : connexion aux fournisseurs d'IA, instructions en langage naturel, appel depuis vos chaînes de profils.","Automatiser les décisions qui exigeaient une intervention humaine, avec journalisation et suivi complets.","Create, configure and deploy AI agents inside the platform: connect to AI providers, give plain-language instructions, and call them from your profile chains.","Automate the decision points that needed a human, with full logging and monitoring."],
-"Pathfinder : interface conversationnelle":["Un assistant IA dans chaque zone de la plateforme : on lui demande en langage naturel de mapper un profil, de créer un élément ou d'interpréter un fichier.","On travaille sans quitter son contexte.","An AI assistant in every area of the platform: ask it in natural language to map a profile, create an element or interpret a file.","You work without leaving your context."],
-"Pathfinder : automapping pour EDIFACT":["L'automapping de Pathfinder prend en charge EDIFACT, en source, en cible ou les deux, y compris pour de grands profils de milliers de champs.","Un mappage EDIFACT en un clic, que vous gardez sous contrôle.","Pathfinder auto-mapping supports EDIFACT on the source side, the target side or both, even for large profiles with thousands of fields.","EDIFACT mapping in one click, with you in control."],
-"Pathfinder : analyse des traces d'erreur par l'IA":["Pathfinder analyse les traces d'erreur des journaux serveur et en fait ressortir les causes.","Fini les heures passées à chercher dans des milliers de lignes.","Pathfinder analyses error traces in server logs and surfaces the root causes.","No more hours spent hunting through thousands of lines."],
-"Lobster.md : base de connaissances client":["Une base de connaissances propre au client, où l'on capture les conventions que « tout le monde connaît » (nommages, qualifiants, formats). Pathfinder la lit au démarrage ; toute entrée proposée par l'IA exige une validation humaine.","Des suggestions adaptées à votre entreprise dès le premier jour.","A customer-owned knowledge store that captures the conventions everyone just knows (naming, qualifiers, formats). Pathfinder reads it at session start, and every AI-proposed entry needs human approval.","Suggestions tailored to your company from day one."],
-"Traitement de documents non structurés":["Extraction de données depuis des documents non structurés (factures, bons de commande, bordereaux) : reconnaissance des champs par l'IA et relecture humaine intégrée.","Un traitement qui s'améliore à chaque relecture.","Data extraction from unstructured documents (invoices, purchase orders, delivery notes): AI field recognition with built-in human review.","Processing that gets better with every review."],
-"Process Map : interactivité et navigation renforcées":["La Process Map devient un espace de travail interactif pour visualiser, rechercher et gérer tout le paysage d'intégration.","Un tableau de bord vivant plutôt qu'un schéma figé.","The Process Map becomes an interactive workspace to visualise, search and manage the whole integration landscape.","A living dashboard instead of a static diagram."],
-"Gestion des changements et audit avancés":["Une piste d'audit intégrée et une fonction d'annulation suivent les modifications des profils, des fonctions et des paramètres, avec leur auteur.","On sait qui a changé quoi, et on peut revenir en arrière.","An integrated audit trail and undo track changes to profiles, functions and settings, with full user attribution.","You know who changed what, and you can roll it back."],
-"Permissions plus fines (profils, macros, configuration)":["Des permissions plus précises pour les profils, les macros et la configuration, qui séparent l'exploitation de la configuration.","Les droits correspondent à la façon dont les équipes travaillent.","More precise permissions for profiles, macros and configuration, separating operation from configuration.","Permissions match the way teams actually work."],
-"Documentation générée pour les chaînes de profils":["L'IA génère la documentation des chaînes de profils.","Une documentation claire et à jour, qui facilite la collaboration.","AI generates the documentation for profile chains.","Clear, up-to-date documentation that makes collaboration easier."],
-"API REST pour les logs et les jobs de profils":["Une API REST donne accès aux journaux de profils, aux résumés de jobs et aux messages préalables, déjà utilisés dans le Control Center.","Un accès supporté pour vos outils, notamment pour les clients en cloud géré.","A REST API gives access to profile logs, job summaries and pre-job messages already used in the Control Center.","Supported access for your own tools, especially for managed cloud customers."],
-"Connecteur DPD (courrier, express, colis)":["Accès au réseau DPD (230 pays et territoires) : étiquettes, réservation d'envois et suivi en temps réel.","Livraison de colis en Europe automatisée.","Access to the DPD network (230 countries and territories): labels, shipment booking and real-time tracking.","Automated parcel delivery across Europe."],
-"Peppol : formats logistiques et Norvège":["Le point d'accès Peppol de Lobster prend en charge les messages logistiques Peppol (avis d'expédition, avis de réception, bordereaux de poids, plans de transport, lettres de transport, statuts) et l'identifiant d'entreprise norvégien.","Des échanges logistiques complets, et l'accès au marché norvégien, via une seule connexion Peppol.","Lobster's Peppol Access Point supports Peppol logistics messages (despatch and receipt advice, weight statements, transport execution plans, waybills, status messages) and Norwegian company registration.","Complete logistics exchange, and access to the Norwegian market, through one Peppol connection."],
-"E-facturation : Slovaquie 2027":["À partir du 1er janvier 2027, la Slovaquie impose que les transactions B2B et B2G passent par le réseau Peppol.","Une connexion certifiée prépare à la facturation électronique à l'échelle de l'UE.","From 1 January 2027, Slovakia requires B2B and B2G transactions to flow through the Peppol network.","One certified connection prepares you for EU-wide e-invoicing."],
-"ZUGFeRD : génération de factures depuis XML":["Génération par modèle de factures hybrides ZUGFeRD 2.5.2 : une facture PDF/A-3 lisible, avec le fichier XML CII intégré.","Conformité européenne sans développement sur mesure.","Template-based generation of ZUGFeRD 2.5.2 hybrid invoices: a readable PDF/A-3 invoice with the CII XML file embedded.","European compliance without custom development."],
-"Trading Partner Manager : domaine propre au client":["Les interactions des partenaires passent par l'URL de confiance du client : Lobster fait office de proxy transparent et l'adresse de la marque reste visible.","Vos partenaires ne voient que votre marque.","Partner interactions go through the customer's own trusted URL: Lobster acts as a transparent proxy and the branded address stays visible.","Your partners only see your brand."],
-"Trading Partner Manager : multi-tenant pour les partenaires":["Les partenaires qui gèrent plusieurs clients peuvent relier leur Trading Partner Manager aux environnements Lobster de chacun.","Tous les écosystèmes de partenaires gérés au même endroit.","Partners who manage several customers can connect their Trading Partner Manager to each customer's Lobster environment.","All partner ecosystems managed from one place."],
-"Traitement de commandes par l'IA dans Trading Partner Manager":["Les partenaires envoient leurs commandes en formats très variés (EDI, CSV, Excel, PDF, même scans manuscrits). L'IA les traiterait automatiquement.","Un goulot d'étranglement de moins pour intégrer de nouveaux partenaires.","Partners send orders in very different formats (EDI, CSV, Excel, PDF, even handwritten scans). AI would process them automatically.","One less bottleneck when onboarding new partners."],
-"Modèle de flux : réception et validation de commandes par l'IA":["Un modèle de flux pour traiter les commandes reçues dans des formats non structurés, sans saisie manuelle sujette aux erreurs.","Moins de saisie, moins d'erreurs.","A workflow template for processing orders received in unstructured formats, without error-prone manual entry.","Less typing, fewer errors."],
-"Pathfinder : journal des modifications d'un profil":["Pathfinder comprend les versions d'un profil et met en évidence les différences entre elles.","Les changements deviennent faciles à suivre et à comprendre.","Pathfinder understands profile versions and highlights the differences between them.","Changes become easy to track and understand."],
-"Pathfinder : explications d'erreurs dans le Data Cockpit":["Les explications d'erreurs de Pathfinder arriveraient directement dans le Data Cockpit.","Une explication claire au moment où l'on voit l'erreur.","Pathfinder's error explanations would arrive directly in the Data Cockpit.","A clear explanation the moment you spot the error."],
-"Expliquer un mapping existant en langage naturel":["On sélectionne un mapping existant et Pathfinder le décrit en langage clair : champs liés, transformations appliquées.","Plus simple à comprendre, à maintenir et à faire évoluer.","Select an existing mapping and Pathfinder describes it in plain language: which fields are linked, which transformations apply.","Easier to understand, maintain and evolve."],
-"Pathfinder : structures générées pour CSV et FixRecord":["Pathfinder générerait automatiquement des structures d'import pour des formats qui demandent beaucoup de configuration manuelle.","Des spécifications complexes transformées en structures d'import en quelques minutes.","Pathfinder would automatically generate import-ready structures for formats that normally need extensive manual setup.","Complex specifications turned into import structures in minutes."],
-"Mode simple ou expert pour l'intégration":["Un mode simple pour les cas courants qui ne demandent que quelques étapes, à côté du mode expert pour les scénarios avancés.","Les cas simples restent simples.","A simple mode for common cases that only need a few steps, alongside an expert mode for advanced scenarios.","Simple cases stay simple."],
-"Validation des jetons OIDC / Entra ID pour les API publiées":["Les appels entrants vers vos API publiées seraient authentifiés en validant les jetons JWT de Microsoft Entra ID ou de tout fournisseur d'identité compatible OIDC.","Votre fournisseur d'identité, vos jetons : une sécurité d'API sans réinventer la roue.","Inbound calls to your published APIs would be authenticated by validating JWT tokens from Microsoft Entra ID or any OIDC-compliant identity provider.","Your identity provider, your tokens: API security without reinventing the wheel."],
-"Lobster Bridge : connectivité REST et SOAP":["Lobster Bridge donnerait au cloud l'accès à des services REST ou SOAP qui restent sur site pour des raisons de conformité ou de sécurité et ne peuvent pas être exposés sur internet.","Les systèmes sur site restent protégés, et la plateforme cloud les atteint quand même.","Lobster Bridge would give the cloud access to REST or SOAP services that stay on-premises for compliance or security reasons and cannot be exposed to the internet.","On-premises systems stay protected, yet the cloud platform can still reach them."],
-"Import de collections Postman":["Importer des collections Postman, outil de référence pour concevoir et tester des API REST, pour créer des flux d'intégration.","Vos collections existantes deviennent des flux en quelques clics.","Import Postman collections, the standard tool for designing and testing REST APIs, to build integration flows.","Your existing collections become flows in a few clicks."],
-"Meilleur support d'OData":["Une meilleure prise en charge d'OData, standard d'API REST courant en entreprise.","Une intégration de données efficace et standardisée.","Better support for OData, a widely used REST API standard in enterprises.","Efficient, standardised data integration."],
-"Migration du site vers Lobster Cloud pour Trading Partner Manager":["Le Trading Partner Manager faciliterait la migration d'une installation sur site vers Lobster Cloud : migration semi-automatique des canaux, gestion du transport, import et synchronisation automatiques.","Une migration prévisible, traçable et à faible risque.","The Trading Partner Manager would streamline migrations from on-premises installations to Lobster Cloud: semi-automatic channel migration, transport management and automatic channel import and sync.","A predictable, auditable, low-risk migration."],
-"Process Map : supervision en temps réel":["La Process Map passerait d'un schéma statique à une surface de supervision et de dépannage en temps réel.","Comprendre et dépanner ses intégrations au même endroit.","The Process Map would evolve from a static diagram into a live monitoring and troubleshooting surface.","Understanding and troubleshooting your integrations in one place."]
-};
+const SD = {"now":[{"fr":["Pathfinder, l'IA intégrée à Lobster, assiste la conception : il propose les mappages, génère les chaînes de fonctions de transformation et aide à écrire les expressions de requête.","Moins de configuration manuelle, des intégrations livrées plus vite."],"en":["Pathfinder, the AI built into Lobster, assists the design work: it proposes mappings, generates transformation function chains and helps write query expressions.","Less manual setup, integrations delivered faster."],"inc":["Génération de mappings par l'IA avec Pathfinder","Pathfinder : copilote d'automapping des transformations","Pathfinder : automapping pour EDIFACT","Pathfinder Copilot : JSONPath et XPath","Pathfinder Copilot : aide pour les expressions régulières","Pathfinder : recherche de fonctions assistée par l'IA","Pathfinder : du langage naturel au SQL"]},{"fr":["Pathfinder transforme les messages d'erreur techniques en explications compréhensibles, là où l'on voit l'erreur, et analyse les traces des journaux serveur.","Le support de premier niveau résout sans escalade."],"en":["Pathfinder turns technical error messages into explanations anyone can follow, right where the error appears, and analyses traces in server logs.","First-level support resolves without escalation."],"inc":["Pathfinder : journal d'erreurs lisible, généré par l'IA","Pathfinder : journal d'erreurs lisible dans l'aperçu des logs","Pathfinder : analyse des traces d'erreur par l'IA"]},{"fr":["Créez, configurez et déployez des agents IA dans la plateforme : connexion aux fournisseurs d'IA, instructions en langage naturel, appel depuis vos chaînes de profils.","Automatiser les décisions qui exigeaient une intervention humaine, avec journalisation et suivi complets."],"en":["Create, configure and deploy AI agents inside the platform: connect to AI providers, give plain-language instructions, and call them from your profile chains.","Automate the decision points that needed a human, with full logging and monitoring."],"inc":["Agents IA Lobster","Pathfinder : interface conversationnelle","Lobster.md : base de connaissances client","Traitement de documents non structurés"]},{"fr":["Lobster fait office de serveur MCP : vos connexions existantes deviennent des ressources accessibles à l'IA, en temps réel. Le gestionnaire de partenaires expose lui aussi des API compatibles MCP.","Les données des anciens systèmes rejoignent les processus modernes, sans RAG ni lac de données."],"en":["Lobster acts as an MCP server: your existing connections become AI-accessible resources, in real time. The partner manager also exposes MCP-compatible APIs.","Data in legacy systems joins modern workflows, with no RAG and no data lake."],"inc":["Support MCP pour les systèmes clients","Trading Partner Manager : API et accès au serveur MCP"]},{"fr":["Lobster est point d'accès Peppol officiel et fournit les connexions et les packages de validation que demandent les mandats de facturation électronique en Europe.","Vous restez conforme sans gérer la complexité réglementaire."],"en":["Lobster is an official Peppol Access Point and provides the connections and validation packages that e-invoicing mandates across Europe require.","You stay compliant without managing the regulatory complexity."],"inc":["Point d'accès Peppol pour la facturation électronique","Conformité KSeF pour la facturation B2B en Pologne","Validation e-facture : XRechnung, BIS Billing, ZUGFeRD / Factur-X","ZUGFeRD : génération de factures depuis XML","Peppol : formats logistiques et Norvège","E-facturation : Slovaquie 2027"]},{"fr":["Les tâches de routine, qui passaient par un ticket de support ou un fichier de configuration, se font en libre-service.","Moins d'attente et moins de dépendance au support."],"en":["Routine tasks that used to need a support ticket or a configuration file are now self-service.","Less waiting and less dependence on support."],"inc":["Onboarding des partenaires automatisé, en libre-service","Certificats gérés en libre-service par les partenaires","Mises à jour de la plateforme en libre-service","Portail libre-service de gestion de l'infrastructure cloud","Configuration gérée depuis l'interface"]}],"dev":[{"fr":["Les partenaires envoient leurs commandes en formats très variés (EDI, CSV, Excel, PDF, même scans manuscrits). L'IA les traiterait automatiquement, avec un modèle de flux de réception et de validation.","Un goulot d'étranglement de moins pour intégrer de nouveaux partenaires."],"en":["Partners send orders in very different formats (EDI, CSV, Excel, PDF, even handwritten scans). AI would process them automatically, with a workflow template for receipt and validation.","One less bottleneck when onboarding new partners."],"inc":["Traitement de commandes par l'IA dans Trading Partner Manager","Modèle de flux : réception et validation de commandes par l'IA"]},{"fr":["On sélectionne un mapping existant et Pathfinder le décrit en langage clair. Il suivrait aussi les versions d'un profil et mettrait en évidence les différences.","Les intégrations deviennent plus faciles à comprendre, à maintenir et à faire évoluer."],"en":["Select an existing mapping and Pathfinder describes it in plain language. It would also track profile versions and highlight the differences.","Integrations become easier to understand, maintain and evolve."],"inc":["Expliquer un mapping existant en langage naturel","Pathfinder : journal des modifications d'un profil","Pathfinder : explications d'erreurs dans le Data Cockpit"]},{"fr":["Pathfinder générerait automatiquement des structures d'import pour des formats qui demandent beaucoup de configuration manuelle.","Des spécifications complexes transformées en structures d'import en quelques minutes."],"en":["Pathfinder would automatically generate import-ready structures for formats that normally need extensive manual setup.","Complex specifications turned into import structures in minutes."],"inc":["Pathfinder : structures générées pour CSV et FixRecord"]},{"fr":["La Process Map passerait d'un schéma statique à une surface de supervision et de dépannage en temps réel.","Comprendre et dépanner ses intégrations au même endroit."],"en":["The Process Map would evolve from a static diagram into a live monitoring and troubleshooting surface.","Understanding and troubleshooting your integrations in one place."],"inc":["Process Map : supervision en temps réel"]},{"fr":["Les appels entrants vers vos API publiées seraient authentifiés en validant les jetons JWT de Microsoft Entra ID ou de tout fournisseur d'identité compatible OIDC.","Votre fournisseur d'identité, vos jetons : une sécurité d'API sans réinventer la roue."],"en":["Inbound calls to your published APIs would be authenticated by validating JWT tokens from Microsoft Entra ID or any OIDC-compliant identity provider.","Your identity provider, your tokens: API security without reinventing the wheel."],"inc":["Validation des jetons OIDC / Entra ID pour les API publiées"]},{"fr":["Lobster Bridge donnerait au cloud l'accès à des services REST ou SOAP qui restent sur site pour des raisons de conformité ou de sécurité. L'import de collections Postman et un meilleur support d'OData simplifieraient l'intégration d'API.","Les systèmes sur site restent protégés, et la plateforme cloud les atteint quand même."],"en":["Lobster Bridge would give the cloud access to REST or SOAP services that stay on-premises for compliance or security reasons. Postman collection import and better OData support would make API integration simpler.","On-premises systems stay protected, yet the cloud platform can still reach them."],"inc":["Lobster Bridge : connectivité REST et SOAP","Import de collections Postman","Meilleur support d'OData"]}]};
 const hx = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
 let lastLi = null;
 function openDetail(li){
   lastLi = li;
-  const fr = li.dataset.fr, st = li.dataset.st, v = li.dataset.v, d = DET[fr];
-  const tag = [...li.classList].find(c=>c.startsWith('t-')).slice(2);
-  const status = st==='rel' ? T('✓ Livré')+' · '+v : st==='now' ? T('✓ Disponible')+' '+T('maintenant') : T('En développement');
-  const i = L==='en' ? 2 : 0;
-  const sum = d ? d[i] : T('Pas de description pour le moment.'), why = d ? d[i+1] : '';
+  const grp = li.dataset.grp, i = +li.dataset.i, d = SD[grp][i], tag = li.dataset.tag;
+  const L2 = L==='en' ? 'en' : 'fr';
+  const status = grp==='now' ? T('✓ Disponible maintenant') : T('En développement');
+  const inc = d.inc.length > 1 ? '<h4>'+hx(T('Inclut'))+'</h4><ul class="minc">'+d.inc.map(x=>'<li>'+hx(T(x))+'</li>').join('')+'</ul>' : '';
   $('m-card').innerHTML = '<button class="mx" id="m-x" aria-label="'+hx(T('Fermer'))+'">✕</button>'
-    + '<div class="mtop"><span class="t-'+tag+'"><span class="ri">'+svg(TAGICON[tag])+'</span></span><span class="pill '+(st==='dev'?'wip':'done')+'">'+hx(status)+'</span></div>'
-    + '<h3 id="m-title">'+hx(T(fr))+'</h3><h4>'+hx(T('En bref'))+'</h4><p>'+hx(sum)+'</p>'
-    + (why ? '<div class="why"><h4>'+hx(T("Pourquoi c'est utile"))+'</h4><p>'+hx(why)+'</p></div>' : '');
+    + '<div class="mtop"><span class="t-'+tag+'"><span class="ri">'+svg(TAGICON[tag])+'</span></span><span class="pill '+(grp==='dev'?'wip':'done')+'">'+hx(status)+'</span></div>'
+    + '<h3 id="m-title">'+hx(T(li.dataset.fr))+'</h3><h4>'+hx(T('En bref'))+'</h4><p>'+hx(d[L2][0])+'</p>'
+    + inc
+    + '<div class="why"><h4>'+hx(T("Pourquoi c'est utile"))+'</h4><p>'+hx(d[L2][1])+'</p></div>';
   $('rm-modal').style.display = 'grid'; $('m-x').focus();
 }
 function closeDetail(){ const m=$('rm-modal'); if(m.style.display==='grid'){ m.style.display='none'; if(lastLi && document.body.contains(lastLi)) lastLi.focus(); } }
-$('roadmap').addEventListener('click', e=>{ const li=e.target.closest('li[data-st]'); if(li) openDetail(li); });
-$('roadmap').addEventListener('keydown', e=>{ if((e.key==='Enter'||e.key===' ') && e.target.matches('li[data-st]')){ e.preventDefault(); openDetail(e.target); } });
+$('roadmap').addEventListener('click', e=>{ const li=e.target.closest('li[data-grp]'); if(li) openDetail(li); });
+$('roadmap').addEventListener('keydown', e=>{ if((e.key==='Enter'||e.key===' ') && e.target.matches('li[data-grp]')){ e.preventDefault(); openDetail(e.target); } });
 $('rm-modal').addEventListener('click', e=>{ if(e.target.id==='rm-modal' || e.target.closest('#m-x')) closeDetail(); });
 let M = 'pres';
 try{ M = localStorage.getItem('mode') === 'full' ? 'full' : 'pres'; }catch(e){}
@@ -869,7 +771,6 @@ function setMode(m){
   M = m; try{ localStorage.setItem('mode', m); }catch(e){}
   document.documentElement.dataset.mode = m;
   $('m-pres').setAttribute('aria-pressed', m==='pres'); $('m-full').setAttribute('aria-pressed', m==='full');
-  if(m==='pres' && rmTag!=='hot'){ rmTag='hot'; renderRoadmap(); }
 }
 $('m-pres').onclick = () => setMode('pres'); $('m-full').onclick = () => setMode('full');
 setMode(M);
