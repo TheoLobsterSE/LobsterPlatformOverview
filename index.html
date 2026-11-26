@@ -236,6 +236,27 @@ html[data-mode="pres"] .d-head p{font-size:24px}
 .card .ri{width:36px;height:36px}
 .card b{font:900 16px/1.2 var(--head);color:var(--g500);overflow-wrap:anywhere}
 .card p{font-size:14px;line-height:1.4;margin:0;color:var(--white)}
+
+.ctotal{font-size:18px;color:var(--g50);margin:24px 0 12px}
+.ctotal b{font:900 36px var(--head);color:var(--g500);margin-right:8px}
+.csearch{width:100%;padding:12px 20px;border-radius:999px;border:2px solid var(--g700);background:var(--g900);color:#fff;font:400 17px var(--body);margin-bottom:16px}
+.csearch:focus{outline:none;border-color:var(--g500)}
+.ctabs small{font-weight:400;color:var(--g200);margin-left:4px}
+.ctabs button[aria-selected="true"] small{color:var(--g500)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:8px}
+.ccard{background:var(--g900);border-radius:12px;padding:16px;border-top:3px solid var(--g500)}
+.chead{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.chead .ri{width:32px;height:32px;flex:none}
+.chead .ri svg{width:18px;height:18px}
+.chead b{font:900 16px/1.2 var(--head);color:var(--g500);flex:1}
+.chead em{font:700 13px var(--body);font-style:normal;color:var(--g200)}
+.chips2{display:flex;flex-wrap:wrap;gap:6px}
+.cchip{font-size:13px;line-height:1.2;padding:4px 10px;border-radius:999px;background:var(--g800);border:1px solid var(--g700);color:#fff}
+.cmore{font-size:13px;padding:4px 6px;color:var(--g200)}
+html[data-mode="pres"] .cchip.extra{display:none}
+html[data-mode="full"] .cmore{display:none}
+html[data-mode="pres"] .ctabs{display:none}
+html[data-mode="pres"] .cgrid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
 .compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .cmp{background:var(--g900);border-radius:12px;padding:24px}
 .cmp h4{font:900 20px var(--head);margin-bottom:16px}
@@ -433,14 +454,8 @@ const ITEMS = [
       ['Tous les mondes de la donnée','Partenaires (EDI), systèmes internes (EAI), big data (ETL), IoT, cloud hybride et interfaces utilisateurs.'],
       ['Le pont entre ancien et moderne','Une API REST/JSON peut alimenter un EDIFACT via AS2 ou un IDoc SAP, sans toucher au système existant.']
     ],
-    demo:{ label:'Le panorama', dark:true, cards:true, cardMin:118, figures:[{src:'demo-formats.png',alt:'Formats et canaux de communication supportés',cap:'Au centre, Lobster. À gauche et à droite, les mondes qu\'il relie ; en cercle, les canaux de communication et les formats.'}],
-      steps:[
-        ['Systèmes internes','EAI : bases de données, ERP, CRM, TMS.','db'],
-        ['Partenaires','EDI : fournisseurs, clients, e-facturation.','handshake'],
-        ['Données et cloud','ETL pour le big data, intégration cloud hybride.','globe'],
-        ['Terrain','IoT et Industrie 4.0 : capteurs et machines.','gauge'],
-        ['Personnes','Saisie et affichage de données via des interfaces.','portal']
-      ]}
+    demo:{ label:'Le catalogue des connecteurs', dark:true, catalog:true, figures:[{src:'demo-formats.png',alt:'Formats et canaux de communication supportés',cap:'Au centre, Lobster. À gauche et à droite, les mondes qu\'il relie ; en cercle, les canaux de communication et les formats.'}],
+    }
   },
   { icon:'portal', title:'Orchestration',
     text:'Créez des applications métier en low-code',
@@ -583,6 +598,7 @@ Object.assign(EN, {"Vidéo Lobster sur l'API de plateforme":"Lobster video on th
 Object.assign(EN, {"Vidéo Lobster sur le serveur MCP":"Lobster video on the MCP server","Vidéo Lobster « Release 25.1: Lobster MCP ».":"Lobster video \"Release 25.1: Lobster MCP\".","Le serveur MCP en action":"The MCP server in action","Par exemple : consulter un produit dans l'ERP, un client dans le CRM, la disponibilité d'un fournisseur.":"For example: look up a product in the ERP, a customer in the CRM, a supplier's availability."});
 Object.assign(EN, {"Vidéo":"Video","Vidéo Lobster : Pathfinder pour l'orchestration":"Lobster video: Pathfinder for Orchestration","Vidéo Lobster « Pathfinder for Orchestration ».":"Lobster video \"Pathfinder for Orchestration\"."});
 Object.assign(EN, {"Vidéo Lobster : la Process Map":"Lobster video: the Process Map","Vidéo Lobster « Release 26.1: Process Map - Visualise Your Data Integration Landscape ».":"Lobster video \"Release 26.1: Process Map - Visualise Your Data Integration Landscape\"."});
+Object.assign(EN, {"Protocoles et messagerie":"Protocols and messaging","Transfert de fichiers et B2B":"File transfer and B2B","Courriel et systèmes historiques":"Mail and legacy","Messagerie, flux et IoT":"Messaging, streaming and IoT","Transporteurs (courrier, express, colis)":"Carriers (courier, express, parcel)","Connecteur CEP multi-transporteurs":"Multi-carrier CEP connector","DPD":"DPD","GLS":"GLS","PostNL":"PostNL","Applications métier":"Business applications","ERP":"ERP","CRM et marketing":"CRM and marketing","E-commerce":"E-commerce","Bureautique et collaboration":"Back office and collaboration","Analyse et BI":"Analytics","Bases de données et stockage":"Databases and storage","Cloud et stockage en ligne":"Cloud and online storage","Autres applications":"Other applications","Formats et standards":"Formats and standards","Standards EDI":"EDI standards","Formats de données":"Data formats","Facturation électronique":"E-invoicing","Peppol BIS Billing":"Peppol BIS Billing","UBL":"UBL","CII":"CII","XRechnung":"XRechnung","ZUGFeRD / Factur-X":"ZUGFeRD / Factur-X","KSeF (Pologne)":"KSeF (Poland)","Le catalogue des connecteurs":"The connector catalogue","Rechercher un connecteur, un protocole, un format…":"Search a connector, protocol or format…","Tout":"All","éléments":"items","Rien ne correspond à cette recherche.":"Nothing matches this search.","de plus":"more","connecteurs, protocoles et formats":"connectors, protocols and formats","Liste établie à partir du marketplace public de Lobster, du schéma ci-dessus et de la roadmap publique. À confirmer avec le produit avant diffusion.":"List compiled from Lobster's public marketplace, the diagram above and the public roadmap. To be confirmed with product before circulation."});
 const T = s => (L==='en' && EN[s]!==undefined) ? EN[s] : s;
 function applyStatic(){
   document.querySelectorAll('[data-t]').forEach(el=>{ if(!el.dataset.fr) el.dataset.fr = el.innerHTML.trim(); el.innerHTML = T(el.dataset.fr); });
@@ -619,6 +635,41 @@ function renderExplanation(it){
   $('p-expl').innerHTML = `<h3>${esc('Explication')}</h3><p class="pitch">${esc(it.pitch)}</p>${sh}${vs}<ul class="points">${pts}</ul>${pf}${story}${stats}${note}`;
 }
 
+
+/* Catalogue des connecteurs (tuile Formats universels) */
+var CAT = [{"key":"proto","fr":"Protocoles et messagerie","en":"Protocols and messaging","cats":[{"icon":"link","fr":"Transfert de fichiers et B2B","en":"File transfer and B2B","items":["AS2","AS4","Peppol","FTP","FTPS","SFTP / SSH","OFTP2","HTTP(S)","TCP","WebEDI","Lobster Bridge"]},{"icon":"doc","fr":"Courriel et systèmes historiques","en":"Mail and legacy","items":["SMTP","POP3 / IMAP","X.400","Fax","AS/400 DataQueue"]},{"icon":"trace","fr":"Messagerie, flux et IoT","en":"Messaging, streaming and IoT","items":["AMQP / JMS","Kafka","MQTT","Google Pub/Sub","Azure Service Bus","OPC UA"]},{"icon":"gauge","fr":"Transporteurs (courrier, express, colis)","en":"Carriers (courier, express, parcel)","items":["Connecteur CEP multi-transporteurs","DPD","GLS","PostNL"]}]},{"key":"apps","fr":"Applications métier","en":"Business applications","cats":[{"icon":"puzzle","fr":"ERP","en":"ERP","items":["SAP IDoc","SAP RFC","OData","SAP Business One","SAP ByDesign","SAP Fieldglass","SAP NetWeaver Gateway","Microsoft Dynamics 365","Microsoft Dynamics 365 Business Central","Microsoft Dynamics NAV","Oracle NetSuite","Oracle Financials Cloud","Sage 200","Sage 300","Sage Cloud Accounting","Sage Intacct","Tally"]},{"icon":"handshake","fr":"CRM et marketing","en":"CRM and marketing","items":["Salesforce","HubSpot","Microsoft Dynamics CRM","Oracle Sales","SAP Hybris C4C","Sugar CRM","SuiteCRM","Veeva CRM","Zoho CRM","ActiveCampaign","Marketo","Streak","Google Campaign Manager","Wave Financial"]},{"icon":"portal","fr":"E-commerce","en":"E-commerce","items":["Adobe Commerce","Amazon Marketplace","BigCommerce","Shopify","Stripe","WooCommerce"]},{"icon":"doc","fr":"Bureautique et collaboration","en":"Back office and collaboration","items":["Microsoft Office 365","Microsoft SharePoint","Microsoft Teams","Microsoft Exchange","Microsoft OneNote","Microsoft Planner","Microsoft Project","DocuSign"]},{"icon":"trace","fr":"Analyse et BI","en":"Analytics","items":["Databricks","Snowflake","Spark","Splunk","SQL Analysis Services","Tableau CRM Analytics","SAS Data Sets","SAS xpt"]},{"icon":"db","fr":"Bases de données et stockage","en":"Databases and storage","items":["JDBC / SQL","JDBC-ODBC Bridge","Microsoft SQL Server","Apache Cassandra","Apache CouchDB","Apache HBase","Apache Hive","Apache Impala","Apache Parquet","Couchbase","HDFS","MarkLogic","Redis"]},{"icon":"globe","fr":"Cloud et stockage en ligne","en":"Cloud and online storage","items":["Azure Data Lake Storage","Azure Cosmos DB","Azure Table","Google Cloud Storage","Google BigQuery","Google Spanner","Amazon Redshift","Amazon DynamoDB","IBM Cloud Object Storage","Microsoft Dataverse","Teradata","Airtable"]},{"icon":"puzzle","fr":"Autres applications","en":"Other applications","items":["Workday","Oracle HCM Cloud","Oracle SCM","Oracle Service Cloud","Zoho Books","Zoho Inventory","Zoho Projects","GraphQL","Power BI XMLA","Google Data Catalog","HCL Domino","QuickBase","Slack","Confluence","Basecamp","MailChimp","LinkedIn","Instagram","Twitter"]}]},{"key":"fmt","fr":"Formats et standards","en":"Formats and standards","cats":[{"icon":"doc","fr":"Standards EDI","en":"EDI standards","items":["EDIFACT","ANSI X12","Tradacoms","VDA","ODETTE","ENGDAT / ENGPART","PRICAT","DESADV","REMADV","SAP IDoc"]},{"icon":"puzzle","fr":"Formats de données","en":"Data formats","items":["XML","JSON","CSV","Excel","PDF","Fix Record","BWA","Parquet","MessagePack"]},{"icon":"shield","fr":"Facturation électronique","en":"E-invoicing","items":["Peppol BIS Billing","UBL","CII","XRechnung","ZUGFeRD / Factur-X","KSeF (Pologne)"]}]}];
+let catFam = 'all', catQ = '';
+function catTitle(o){ return L==='en' ? o.en : o.fr; }
+function catItem(x){ return T(x); }
+function catTotals(){
+  const all = new Set(); const fam = {};
+  CAT.forEach(f=>{ const s=new Set(); f.cats.forEach(c=>c.items.forEach(x=>{ s.add(catItem(x)); all.add(catItem(x)); })); fam[f.key]=s.size; });
+  return { all: all.size, fam };
+}
+function catGrid(){
+  const q = catQ.trim().toLowerCase(); const out = [];
+  CAT.forEach(f=>{
+    if(catFam!=='all' && catFam!==f.key) return;
+    f.cats.forEach(c=>{
+      const items = c.items.filter(x=> !q || catItem(x).toLowerCase().includes(q) || catTitle(c).toLowerCase().includes(q));
+      if(!items.length) return;
+      const chips = items.map((x,i)=>'<span class="cchip'+(i>=8&&!q?' extra':'')+'">'+hx(catItem(x))+'</span>').join('');
+      const more = (!q && items.length>8) ? '<span class="cmore">+'+(items.length-8)+' '+hx(T('de plus'))+'</span>' : '';
+      out.push('<div class="ccard"><div class="chead"><span class="ri">'+svg(c.icon)+'</span><b>'+hx(catTitle(c))+'</b><em>'+items.length+'</em></div><div class="chips2">'+chips+more+'</div></div>');
+    });
+  });
+  return out.length ? out.join('') : '<p class="rm-empty">'+hx(T('Rien ne correspond à cette recherche.'))+'</p>';
+}
+function catShell(){
+  const t = catTotals();
+  const tabs = [['all',T('Tout'),t.all]].concat(CAT.map(f=>[f.key,catTitle(f),t.fam[f.key]]))
+    .map(x=>'<button role="tab" data-fam="'+x[0]+'" aria-selected="'+(x[0]===catFam)+'">'+hx(x[1])+' <small>'+x[2]+'</small></button>').join('');
+  return '<p class="ctotal"><b>'+t.all+'</b> '+hx(T('connecteurs, protocoles et formats'))+'</p>'
+    + '<input id="cat-q" class="csearch" type="search" value="'+hx(catQ)+'" placeholder="'+hx(T('Rechercher un connecteur, un protocole, un format…'))+'" aria-label="'+hx(T('Rechercher un connecteur, un protocole, un format…'))+'">'
+    + '<div class="tabs ctabs" role="tablist">'+tabs+'</div>'
+    + '<div id="cat-grid" class="cgrid">'+catGrid()+'</div>'
+    + '<p class="caption">'+hx(T('Liste établie à partir du marketplace public de Lobster, du schéma ci-dessus et de la roadmap publique. À confirmer avec le produit avant diffusion.'))+'</p>';
+}
 function renderDemo(it){
   const d = it.demo; let html = `<h3>${esc(d.label||'En images')}</h3>`;
   if(d.compare){
@@ -636,6 +687,7 @@ function renderDemo(it){
     if(f.video){ html += `<div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/${f.video}?start=${f.start||0}&rel=0" title="${esc(f.alt)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div><p class="caption">${esc(f.cap)}</p>`; } else
     html += `<button class="fig ${d.dark?'dark':''} ${f.narrow?'narrow':''}" id="fig" aria-label="${esc("Agrandir l'image")}"><img src="assets/${f.src}" alt="${esc(f.alt)}"></button><p class="caption">${esc(f.cap)}</p>`;
   }
+  if(d.catalog) html += catShell();
   if(d.steps && d.cards){
     html += `<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(${d.cardMin||190}px,1fr))">${d.steps.map((s,i)=>{
       const link = typeof s[2]==='number' ? s[2] : undefined, ic = typeof s[2]==='string' ? s[2] : (d.icons&&d.icons[i]) || 'spark';
@@ -671,6 +723,8 @@ const go = i => location.hash = `#/${((i%ITEMS.length)+ITEMS.length)%ITEMS.lengt
 const cur = () => { const m=location.hash.match(/^#\/(\d+)$/); return m?+m[1]-1:-1; };
 
 $('grid').addEventListener('click', e=>{ const t=e.target.closest('.tile'); if(t) go(+t.dataset.i); });
+$('p-demo').addEventListener('input', e=>{ if(e.target.id==='cat-q'){ catQ=e.target.value; $('cat-grid').innerHTML=catGrid(); } });
+$('p-demo').addEventListener('click', e=>{ const b=e.target.closest('[data-fam]'); if(b && b.closest('.ctabs')){ catFam=b.dataset.fam; document.querySelectorAll('.ctabs button').forEach(x=>x.setAttribute('aria-selected', x.dataset.fam===catFam)); $('cat-grid').innerHTML=catGrid(); e.stopPropagation(); } }, true);
 $('p-demo').addEventListener('click', e=>{
   const it = ITEMS[cur()]; if(!it) return;
   const s = e.target.closest('[data-step]'), f = e.target.closest('[data-fig]'), z = e.target.closest('#fig');
