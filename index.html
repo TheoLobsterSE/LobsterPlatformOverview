@@ -522,7 +522,7 @@ const ITEMS = [
       ['Piloté par vos propres IA','L\'API de plateforme (headless) permet de construire et d\'exploiter Lobster avec vos propres agents.']
     ],
     demo:{ cards:true, icons:['spark','robot','puzzle','shield','gauge','doc'], label:"L'IA au travail", dark:true,
-      figures:[{src:'agentic-build.png',alt:'Un assistant IA prépare un profil Lobster EDIFACT vers XML',cap:'Un assistant IA prépare un profil EDIFACT vers XML : il lit les exemples et un profil existant, puis propose un plan de mappage avant d\'écrire quoi que ce soit dans l\'instance. Interface en anglais.'}],
+      figures:[{video:'dP_csF0FOqM',start:0,alt:"Vidéo Lobster sur l'API de plateforme",cap:"Vidéo Lobster « Platform API »."}],
       steps:[
         ['Construire','Via l\'API de plateforme, votre propre assistant IA conçoit un profil : il lit les exemples, étudie un profil existant et propose un plan de mappage avant d\'écrire.'],
         ['Demande','Un agent IA demande une action, par exemple écrire dans l\'ERP.'],
@@ -578,6 +578,7 @@ Object.assign(EN, {"Orchestration":"Orchestration","Créez des applications mét
 Object.assign(EN, {"Pathfinder à la manœuvre":"Pathfinder at the helm","Déposez un fichier : Pathfinder crée les modèles et le pipeline d'intégration, et ajuste automatiquement l'interface du portail.":"Upload a file: Pathfinder creates the models and the integration pipeline, and adjusts the portal UI automatically.","Un fichier déposé : modèles, pipeline et interface du portail ajustés automatiquement":"Upload a file: models, pipeline and portal UI adjusted automatically","Pathfinder crée les modèles et le pipeline d'intégration à partir d'un fichier déposé, et ajuste automatiquement l'interface du portail.":"Pathfinder creates the models and the integration pipeline from an uploaded file, and adjusts the portal UI automatically."});
 Object.assign(EN, {"Traitement de documents non structurés (UDP) : PDF et images transformés en données structurées":"Unstructured Document Processing (UDP): turns PDFs and images into structured data"});
 Object.assign(EN, {"Vidéo Lobster « Release 26.1: Trading Partner Manager - Automate Partner Onboarding », lancée à 11:49.":"Lobster video \"Release 26.1: Trading Partner Manager - Automate Partner Onboarding\", starting at 11:49.","Vidéo de démonstration du Trading Partner Manager":"Trading Partner Manager demo video"});
+Object.assign(EN, {"Vidéo Lobster sur l'API de plateforme":"Lobster video on the platform API","Vidéo Lobster « Platform API ».":"Lobster video \"Platform API\"."});
 const T = s => (L==='en' && EN[s]!==undefined) ? EN[s] : s;
 function applyStatic(){
   document.querySelectorAll('[data-t]').forEach(el=>{ if(!el.dataset.fr) el.dataset.fr = el.innerHTML.trim(); el.innerHTML = T(el.dataset.fr); });
