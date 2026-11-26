@@ -501,14 +501,14 @@ const ITEMS = [
       ['Une carte vivante','La Process Map dessine les dépendances entre profils, API et flux ETL. Un double-clic ouvre la configuration.'],
       ['Des erreurs en langage clair','Pathfinder traduit les traces techniques en solutions : le support de premier niveau résout sans escalade.']
     ],
-    demo:{ cards:true, icons:['globe','doc','spark','trace'], label:'Dans la console', figures:[
-        {tab:'Control Center',src:'demo-controlcenter.png',alt:'Control Center : liste des jobs',cap:'Le Control Center : tous les jobs, leur profil, leur durée, filtrables sur la période.'},
-        {tab:'Process Map',src:'demo-processmap.png',alt:'Process Map',cap:'La Process Map : un profil, ses entrées, ses canaux et les profils qu\'il déclenche.'}],
+    demo:{ cards:true, icons:['trace','globe','doc','spark'], label:'Dans la console', figures:[
+        {tab:'Process Map',video:'IFJWgkB9ugM',start:0,alt:"Vidéo Lobster : la Process Map",cap:"Vidéo Lobster « Release 26.1: Process Map - Visualise Your Data Integration Landscape »."},
+        {tab:'Control Center',src:'demo-controlcenter.png',alt:'Control Center : liste des jobs',cap:'Le Control Center : tous les jobs, leur profil, leur durée, filtrables sur la période.'}],
       steps:[
-        ['Rechercher','Filtrer par période, profil, champ ou « erreurs uniquement ».',0],
-        ['Ouvrir un job','Le détail du traitement s\'affiche, phase par phase.',0],
-        ['Comprendre','Pathfinder traduit l\'erreur en langage clair.',0],
-        ['Voir le tout','La Process Map montre où le job s\'insère dans l\'écosystème.',1]
+        ['Voir le tout','La Process Map montre où le job s\'insère dans l\'écosystème.',0],
+        ['Rechercher','Filtrer par période, profil, champ ou « erreurs uniquement ».',1],
+        ['Ouvrir un job','Le détail du traitement s\'affiche, phase par phase.',1],
+        ['Comprendre','Pathfinder traduit l\'erreur en langage clair.',1]
       ]}
   },
   { icon:'shield', title:'API de plateforme agentique',
@@ -582,6 +582,7 @@ Object.assign(EN, {"Vidéo Lobster « Release 26.1: Trading Partner Manager - Au
 Object.assign(EN, {"Vidéo Lobster sur l'API de plateforme":"Lobster video on the platform API","Vidéo Lobster « Platform API ».":"Lobster video \"Platform API\"."});
 Object.assign(EN, {"Vidéo Lobster sur le serveur MCP":"Lobster video on the MCP server","Vidéo Lobster « Release 25.1: Lobster MCP ».":"Lobster video \"Release 25.1: Lobster MCP\".","Le serveur MCP en action":"The MCP server in action","Par exemple : consulter un produit dans l'ERP, un client dans le CRM, la disponibilité d'un fournisseur.":"For example: look up a product in the ERP, a customer in the CRM, a supplier's availability."});
 Object.assign(EN, {"Vidéo":"Video","Vidéo Lobster : Pathfinder pour l'orchestration":"Lobster video: Pathfinder for Orchestration","Vidéo Lobster « Pathfinder for Orchestration ».":"Lobster video \"Pathfinder for Orchestration\"."});
+Object.assign(EN, {"Vidéo Lobster : la Process Map":"Lobster video: the Process Map","Vidéo Lobster « Release 26.1: Process Map - Visualise Your Data Integration Landscape ».":"Lobster video \"Release 26.1: Process Map - Visualise Your Data Integration Landscape\"."});
 const T = s => (L==='en' && EN[s]!==undefined) ? EN[s] : s;
 function applyStatic(){
   document.querySelectorAll('[data-t]').forEach(el=>{ if(!el.dataset.fr) el.dataset.fr = el.innerHTML.trim(); el.innerHTML = T(el.dataset.fr); });
