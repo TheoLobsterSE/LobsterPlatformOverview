@@ -299,6 +299,71 @@ footer{margin-top:auto;padding-top:32px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (max-width:1100px){.rm-versions{grid-template-columns:repeat(2,1fr)}.rm-cols{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.panels{grid-template-columns:1fr}.page{padding:24px 32px}}
 @media (max-width:600px){.rm-versions{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.d-head{flex-direction:column;align-items:flex-start}.compare,.stats{grid-template-columns:1fr}}
+/* Page d'accueil compacte : les 8 tuiles tiennent sans défiler */
+.page{padding:20px 64px 16px}
+#home h1{font-size:clamp(30px,3.2vw,46px);margin:16px 0 4px}
+#home .lead{font-size:20px}
+#home .platform{margin-top:12px;padding:6px 20px;font-size:15px}
+#home .pf-legend{display:inline-flex;margin:12px 0 0 16px;font-size:15px;vertical-align:middle}
+#home .grid{gap:16px;margin:16px 0 16px}
+#home .tile{padding:16px 20px;min-height:0}
+#home .trow{margin-bottom:12px}
+#home .tile .icon{width:48px;height:48px;margin-bottom:12px}
+#home .tile .icon svg{width:26px;height:26px}
+#home .tile h2{font-size:19px;margin-bottom:6px}
+#home .tile p{font-size:15px;line-height:1.35}
+#home .more{padding-top:8px;font-size:14px}
+#home .banner{padding:12px 24px}
+#home .banner .icon{width:44px;height:44px}
+#home .banner-txt b{font-size:20px}
+#home .banner-txt span{font-size:15px}
+@media (max-width:1100px){#home .pf-legend{display:flex;margin:12px 0 0}}
+@media (max-height:860px){
+  #home h1{font-size:clamp(28px,2.8vw,38px);margin:8px 0 0}
+  #home .lead{font-size:18px}
+  #home .platform{margin-top:8px}
+  #home .pf-legend{margin-top:8px}
+  #home .grid{gap:12px;margin:12px 0}
+  #home .tile{padding:12px 16px}
+  #home .trow{margin-bottom:8px}
+  #home .tile .icon{width:40px;height:40px;margin-bottom:8px}
+  #home .tile .icon svg{width:22px;height:22px}
+  #home .tile h2{font-size:17px}
+  #home .tile p{font-size:14px}
+  #home .tile .more{display:none}
+  #home .banner{padding:8px 20px}
+}
+/* Vues détail et roadmap : même densité que l'accueil */
+#detail,#roadmap{zoom:.82}
+#detail .back,#roadmap .back{margin-top:12px}
+#detail .d-head{margin:16px 0 20px}
+/* En-têtes des vues : compacts et alignés sur l'accueil */
+#detail .back,#roadmap .back{margin-top:4px;padding:4px 16px;font-size:14px}
+#detail .d-head{gap:16px;margin:12px 0 12px;align-items:center}
+#detail .d-head .icon{width:52px;height:52px;margin:0;flex:none}
+#detail .d-head .icon svg{width:28px;height:28px}
+html #detail .d-head h2{font-size:clamp(30px,3.2vw,46px);line-height:1.05}
+#detail .d-head small{font-size:13px}
+html[data-mode] #detail .d-head p{display:inline;font-size:18px;margin:0}
+#detail #d-pf{display:inline-flex;margin:0 0 0 12px!important;vertical-align:middle}
+#detail .panels{margin-top:0}
+#roadmap .rs-title{margin:12px 0 4px;font-size:clamp(28px,3vw,44px)}
+#roadmap .rs-chips{margin:16px 0}
+#detail .d-head .icon{display:none}
+#detail .d-head{display:block;margin:8px 0 12px}
+#detail .d-head small{display:block;margin-bottom:2px}
+html #detail .d-head h2{margin:0 0 6px}
+#home .pf-legend{margin:12px 0 0}
+.unify{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0 4px}
+.uchip{border:2px solid var(--g500);border-radius:12px;padding:10px 14px;background:var(--g900)}
+.uchip b{display:block;font:900 20px/1.1 var(--head);color:var(--g500)}
+.uchip span{font-size:13px;color:var(--g50)}
+.uarrow{text-align:center;font:700 15px var(--body);color:var(--g200);margin:6px 0 10px}
+.phases li[data-ph]{cursor:pointer;transition:background .2s,border-color .2s}
+.phases li[data-ph]:hover{border-color:var(--g500)}
+.phtext{margin:10px 0 16px;padding:12px 16px;border-left:4px solid var(--g500);border-radius:12px;background:var(--g900);font-size:17px;line-height:1.4}
+.phtext b{color:var(--g500);margin-right:6px}
+@media (max-width:700px){.unify{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -315,7 +380,6 @@ footer{margin-top:auto;padding-top:32px}
     <section id="home">
       <h1 data-t>Les différenciateurs <span class="g">Lobster</span></h1>
       <p class="lead" data-t>Huit raisons de bâtir vos échanges de données sur une seule plateforme.</p>
-      <span class="platform">Lobster Data Platform</span>
       <p class="pf-legend"><span class="pftag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 16v4M17 18h4"/></svg>Pathfinder</span> <span data-t>Pathfinder, le copilote IA intégré à Lobster, est présent dans chacun de ces différenciateurs.</span></p>
       <div class="grid" id="grid"></div>
       <a class="banner" href="#/roadmap">
@@ -396,7 +460,7 @@ const ITEMS = [
       ['Gouvernance','Journalisation et règles sont liées aux phases : le comportement est prévisible et auditable, y compris quand une IA déclenche l\'action.'],
       ['Performance','Chaque phase a un seul rôle, et la complexité s\'absorbe : un EDIFACT lourd vers un IDoc SAP passe par le mappage arborescent plutôt que par un réseau de fils visuellement impossible.']
     ],
-    demo:{ cards:true, icons:['db','link','puzzle','spark','trace'], label:"Dans l'outil", phasesTitle:'Un cycle de vie unique pour chaque profil', phases:['Entrée','Analyse','Transformation','Structure SQL','Formatage','Sortie'], figures:[{src:'demo-mapping.png',alt:'Écran de mappage Lobster, phase 3',cap:'Le mappage de la phase 3 : structure source à gauche, structure cible au centre, fonctions et Pathfinder à droite.'}],
+    demo:{ cards:true, icons:['db','link','puzzle','spark','trace'], label:"Dans l'outil", unify:{"chips":[["EDI","Échanges avec les partenaires"],["EAI","Systèmes internes"],["API","Services web et applications"],["ETL","Gros volumes de données"]],"arrow":"Un seul cycle de vie en 6 phases pour les quatre"}, phaseTexts:["Reçoit les données depuis n'importe quelle source : fichier, appel d'API, message. Un problème ici est un problème de transport.","Lit les données entrantes et les met sous une forme que Lobster comprend. Un problème ici est un problème de structure.","Transforme les données de la source vers la cible, arbre contre arbre, avec des fonctions prêtes à l'emploi. Pathfinder aide ici. Un problème ici est un problème de logique.","Structure les données pour les bases de données quand le flux en a besoin.","Construit le résultat dans le format de la cible : EDIFACT, XML, JSON, IDoc…","Livre le résultat à sa destination : AS2, SFTP, REST, ERP… On change de canal sans toucher au mappage."], phasesTitle:'Un cycle de vie unique pour chaque profil', phases:['Entrée','Analyse','Transformation','Structure SQL','Formatage','Sortie'], figures:[{src:'demo-mapping.png',alt:'Écran de mappage Lobster, phase 3',cap:'Le mappage de la phase 3 : structure source à gauche, structure cible au centre, fonctions et Pathfinder à droite.'}],
       steps:[
         ['Source','La structure du message entrant s\'affiche à gauche, en arborescence.'],
         ['Cible','La structure attendue par le système de destination s\'affiche au centre.'],
@@ -598,6 +662,7 @@ Object.assign(EN, {"Vidéo Lobster sur le serveur MCP":"Lobster video on the MCP
 Object.assign(EN, {"Vidéo":"Video","Vidéo Lobster : Pathfinder pour l'orchestration":"Lobster video: Pathfinder for Orchestration","Vidéo Lobster « Pathfinder for Orchestration ».":"Lobster video \"Pathfinder for Orchestration\"."});
 Object.assign(EN, {"Vidéo Lobster : la Process Map":"Lobster video: the Process Map","Vidéo Lobster « Release 26.1: Process Map - Visualise Your Data Integration Landscape ».":"Lobster video \"Release 26.1: Process Map - Visualise Your Data Integration Landscape\"."});
 Object.assign(EN, {"Protocoles et messagerie":"Protocols and messaging","Transfert de fichiers et B2B":"File transfer and B2B","Courriel et systèmes historiques":"Mail and legacy","Messagerie, flux et IoT":"Messaging, streaming and IoT","Transporteurs (courrier, express, colis)":"Carriers (courier, express, parcel)","Connecteur CEP multi-transporteurs":"Multi-carrier CEP connector","DPD":"DPD","GLS":"GLS","PostNL":"PostNL","Applications métier":"Business applications","ERP":"ERP","CRM et marketing":"CRM and marketing","E-commerce":"E-commerce","Bureautique et collaboration":"Back office and collaboration","Analyse et BI":"Analytics","Bases de données et stockage":"Databases and storage","Cloud et stockage en ligne":"Cloud and online storage","Autres applications":"Other applications","Formats et standards":"Formats and standards","Standards EDI":"EDI standards","Formats de données":"Data formats","Facturation électronique":"E-invoicing","Peppol BIS Billing":"Peppol BIS Billing","UBL":"UBL","CII":"CII","XRechnung":"XRechnung","ZUGFeRD / Factur-X":"ZUGFeRD / Factur-X","KSeF (Pologne)":"KSeF (Poland)","Le catalogue des connecteurs":"The connector catalogue","Rechercher un connecteur, un protocole, un format…":"Search a connector, protocol or format…","Tout":"All","éléments":"items","Rien ne correspond à cette recherche.":"Nothing matches this search.","de plus":"more","connecteurs, protocoles et formats":"connectors, protocols and formats","Liste établie à partir du marketplace public de Lobster, du schéma d'architecture Lobster et de la roadmap publique. À confirmer avec le produit avant diffusion.":"List compiled from Lobster's public marketplace, the Lobster architecture diagram and the public roadmap. To be confirmed with product before circulation."});
+Object.assign(EN, {"Échanges avec les partenaires":"Exchanges with partners","Systèmes internes":"Internal systems","Services web et applications":"Web services and applications","Gros volumes de données":"Large volumes of data","Un seul cycle de vie en 6 phases pour les quatre":"One 6-phase lifecycle for all four","Reçoit les données depuis n'importe quelle source : fichier, appel d'API, message. Un problème ici est un problème de transport.":"Receives the data from any source: a file, an API call, a message. A problem here is a transport problem.","Lit les données entrantes et les met sous une forme que Lobster comprend. Un problème ici est un problème de structure.":"Reads the incoming data and puts it in a form Lobster understands. A problem here is a structure problem.","Transforme les données de la source vers la cible, arbre contre arbre, avec des fonctions prêtes à l'emploi. Pathfinder aide ici. Un problème ici est un problème de logique.":"Transforms the data from source to target, tree to tree, with ready-made functions. Pathfinder helps here. A problem here is a logic problem.","Structure les données pour les bases de données quand le flux en a besoin.":"Structures the data for databases when the flow needs it.","Construit le résultat dans le format de la cible : EDIFACT, XML, JSON, IDoc…":"Builds the result in the target's format: EDIFACT, XML, JSON, IDoc…","Livre le résultat à sa destination : AS2, SFTP, REST, ERP… On change de canal sans toucher au mappage.":"Delivers the result to its destination: AS2, SFTP, REST, ERP… Swap the channel without touching the mapping.","Phase":"Phase"});
 const T = s => (L==='en' && EN[s]!==undefined) ? EN[s] : s;
 function applyStatic(){
   document.querySelectorAll('[data-t]').forEach(el=>{ if(!el.dataset.fr) el.dataset.fr = el.innerHTML.trim(); el.innerHTML = T(el.dataset.fr); });
@@ -675,10 +740,15 @@ function renderDemo(it){
     const c = d.compare, col = (o,cls)=>`<div class="cmp ${cls}"><h4>${esc(o.title)}</h4><ul>${o.items.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><p class="big">${esc(o.big)}</p></div>`;
     html += `<div class="compare" style="margin-bottom:24px">${col(c.before,'before')}${col(c.after,'after')}</div>`;
   }
+  if(d.unify){
+    html += '<div class="unify">'+d.unify.chips.map(c=>'<div class="uchip"><b>'+hx(c[0])+'</b><span>'+hx(T(c[1]))+'</span></div>').join('')+'</div><p class="uarrow">↓ '+hx(T(d.unify.arrow))+'</p>';
+  }
   if(d.phases){
-    const on = d.phasesOn ?? 2;
+    const inter = !!d.phaseTexts;
+    const on = inter ? (state.ph ?? d.phasesOn ?? 2) : (d.phasesOn ?? 2);
     html += (d.phasesTitle ? `<p class="caption" style="margin:0 0 8px">${esc(d.phasesTitle)}</p>` : '') +
-      `<ol class="phases">${d.phases.map((p,i)=>`<li${i===on?' class="on"':''}><i>${i+1}</i>${esc(p)}</li>`).join('')}</ol>`;
+      `<ol class="phases">${d.phases.map((p,i)=>`<li${i===on?' class="on"':''}${inter?' data-ph="'+i+'" tabindex="0" role="button"':''}><i>${i+1}</i>${esc(p)}</li>`).join('')}</ol>`;
+    if(inter) html += '<p class="phtext"><b>'+hx(T('Phase'))+' '+(on+1)+' · '+hx(T(d.phases[on]))+'</b> '+hx(T(d.phaseTexts[on]))+'</p>';
   }
   if(d.figures){
     if(d.figures.length>1) html += `<div class="tabs" role="tablist">${d.figures.map((f,i)=>`<button role="tab" data-fig="${i}" aria-selected="${i===state.fig}">${esc(f.tab)}</button>`).join('')}</div>`;
@@ -722,6 +792,8 @@ const go = i => location.hash = `#/${((i%ITEMS.length)+ITEMS.length)%ITEMS.lengt
 const cur = () => { const m=location.hash.match(/^#\/(\d+)$/); return m?+m[1]-1:-1; };
 
 $('grid').addEventListener('click', e=>{ const t=e.target.closest('.tile'); if(t) go(+t.dataset.i); });
+$('p-demo').addEventListener('click', e=>{ const p=e.target.closest('[data-ph]'); if(p){ state.ph=+p.dataset.ph; renderDemo(ITEMS[state.i]); } });
+$('p-demo').addEventListener('keydown', e=>{ const p=e.target.closest && e.target.closest('[data-ph]'); if(p && (e.key==='Enter'||e.key===' ')){ e.preventDefault(); state.ph=+p.dataset.ph; renderDemo(ITEMS[state.i]); } });
 $('p-demo').addEventListener('input', e=>{ if(e.target.id==='cat-q'){ catQ=e.target.value; $('cat-grid').innerHTML=catGrid(); } });
 $('p-demo').addEventListener('click', e=>{ const b=e.target.closest('[data-fam]'); if(b && b.closest('.ctabs')){ catFam=b.dataset.fam; document.querySelectorAll('.ctabs button').forEach(x=>x.setAttribute('aria-selected', x.dataset.fam===catFam)); $('cat-grid').innerHTML=catGrid(); e.stopPropagation(); } }, true);
 $('p-demo').addEventListener('click', e=>{
