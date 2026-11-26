@@ -204,6 +204,8 @@ html[data-mode="pres"] .d-head p{font-size:24px}
 .tabs button{padding:4px 16px;border-radius:999px;border:2px solid var(--g700);font:700 14px var(--body)}
 .tabs button[aria-selected="true"]{border-color:var(--g500);color:var(--g500)}
 .fig{display:block;width:100%;border-radius:12px;overflow:hidden;background:var(--g950);cursor:zoom-in;position:relative}
+.vid{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--g950)}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .fig.narrow{max-width:240px;margin:0 auto}
 .fig img{display:block;width:100%;height:auto;background:#fff}
 .fig.dark img{background:var(--g950)}
@@ -418,13 +420,7 @@ const ITEMS = [
     demo:{ cards:true, icons:['handshake','doc','shield','link'], label:'Avant / après', compare:{
         before:{title:'Avant',items:['Courriel au partenaire pour obtenir ses informations','Réponse du partenaire (un jour, peut-être)','Saisie manuelle par l\'équipe IT','Test, correction, nouveau test'],big:'3 à 6 semaines'},
         after:{title:'Avec le gestionnaire de partenaires',items:['Le partenaire reçoit un lien','Il choisit son protocole et remplit ses informations','Configuration enregistrée dans la plateforme','L\'équipe voit l\'avancement, sans relancer'],big:'Des jours, pas des semaines'}},
-      figures:[{src:'demo-tpm-company.png',alt:'Écran « Mon entreprise » du gestionnaire de partenaires, onglet Informations complémentaires',cap:'Le gestionnaire de partenaires : champs supplémentaires de l\'entreprise, leur type de validation et les protocoles qui les utilisent. Interface en anglais.'}],
-      steps:[
-        ['Mon entreprise','Le gestionnaire de partenaires regroupe les informations de l\'entreprise : détails, utilisateurs, mentions légales, e-mails et informations complémentaires.'],
-        ['Vos champs','On ajoute ses propres champs : code société, identifiant, numéro de TVA, GLN, IBAN.'],
-        ['Validation','Chaque champ a son type de validation : alphanumérique, numérique, numéro de TVA européen, GLN, expression régulière.'],
-        ['Par protocole','Chaque champ indique les protocoles qui l\'utilisent : AS2, SFTP, FTP ou HTTPS.']
-      ]}
+      figures:[{video:'ZiUES4osSkY',start:709,alt:"Vidéo de démonstration du Trading Partner Manager",cap:"Vidéo Lobster « Release 26.1: Trading Partner Manager - Automate Partner Onboarding », lancée à 11:49."}]}
   },
   { icon:'globe', title:'Formats universels',
     text:'Prise en charge native des principaux standards et protocoles',
@@ -581,6 +577,7 @@ Object.assign(EN, {"Inclut":"Includes"});
 Object.assign(EN, {"Orchestration":"Orchestration","Créez des applications métier en low-code":"Build business apps in low code"});
 Object.assign(EN, {"Pathfinder à la manœuvre":"Pathfinder at the helm","Déposez un fichier : Pathfinder crée les modèles et le pipeline d'intégration, et ajuste automatiquement l'interface du portail.":"Upload a file: Pathfinder creates the models and the integration pipeline, and adjusts the portal UI automatically.","Un fichier déposé : modèles, pipeline et interface du portail ajustés automatiquement":"Upload a file: models, pipeline and portal UI adjusted automatically","Pathfinder crée les modèles et le pipeline d'intégration à partir d'un fichier déposé, et ajuste automatiquement l'interface du portail.":"Pathfinder creates the models and the integration pipeline from an uploaded file, and adjusts the portal UI automatically."});
 Object.assign(EN, {"Traitement de documents non structurés (UDP) : PDF et images transformés en données structurées":"Unstructured Document Processing (UDP): turns PDFs and images into structured data"});
+Object.assign(EN, {"Vidéo Lobster « Release 26.1: Trading Partner Manager - Automate Partner Onboarding », lancée à 11:49.":"Lobster video \"Release 26.1: Trading Partner Manager - Automate Partner Onboarding\", starting at 11:49.","Vidéo de démonstration du Trading Partner Manager":"Trading Partner Manager demo video"});
 const T = s => (L==='en' && EN[s]!==undefined) ? EN[s] : s;
 function applyStatic(){
   document.querySelectorAll('[data-t]').forEach(el=>{ if(!el.dataset.fr) el.dataset.fr = el.innerHTML.trim(); el.innerHTML = T(el.dataset.fr); });
@@ -631,6 +628,7 @@ function renderDemo(it){
   if(d.figures){
     if(d.figures.length>1) html += `<div class="tabs" role="tablist">${d.figures.map((f,i)=>`<button role="tab" data-fig="${i}" aria-selected="${i===state.fig}">${esc(f.tab)}</button>`).join('')}</div>`;
     const f = d.figures[state.fig];
+    if(f.video){ html += `<div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/${f.video}?start=${f.start||0}&rel=0" title="${esc(f.alt)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div><p class="caption">${esc(f.cap)}</p>`; } else
     html += `<button class="fig ${d.dark?'dark':''} ${f.narrow?'narrow':''}" id="fig" aria-label="${esc("Agrandir l'image")}"><img src="assets/${f.src}" alt="${esc(f.alt)}"></button><p class="caption">${esc(f.cap)}</p>`;
   }
   if(d.steps && d.cards){
