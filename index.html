@@ -457,17 +457,18 @@ const ITEMS = [
     demo:{ cards:true, icons:['puzzle','shield','doc','portal','gauge','trace'], label:'Le portail en action', phasesTitle:'Le parcours d\'une exception', phasesOn:3,
       phases:['Réception','Extraction IA','Porte logique','Portail','Validation finale'],
       figures:[
+        {tab:'Vidéo',video:'CVxaMf6RR0g',start:0,alt:"Vidéo Lobster : Pathfinder pour l'orchestration",cap:"Vidéo Lobster « Pathfinder for Orchestration »."},
         {tab:'Vue d\'ensemble',src:'orchestration-slide.png',alt:'Schéma de l\'orchestration Lobster',cap:'L\'orchestration : construisez vos applications métier et exécutez-les comme un seul processus. Après chaque décision, l\'intégration prend le relais (EDI, API, ETL) vers tout ERP, CRM, PLM, MES, base de données ou équipement. Schéma en anglais.'},
         {tab:'Connexion',narrow:true,src:'lindt-login.png',alt:'Page de connexion du portail Lindt',cap:'Connexion au portail Lindt : identifiant et mot de passe, ou compte Microsoft. Interface en allemand.'},
         {tab:'Liste de chargement',src:'lindt-ladeliste.png',alt:'Détail d\'une liste de chargement dans le portail Lindt',cap:'Détail d\'une liste de chargement (Ladeliste). Interface en allemand ; données personnelles masquées.'},
         {tab:'Suivi des envois',src:'portal-tracking.png',alt:'Tableau de bord de suivi des envois A2Z-Logistics',cap:'Tableau de bord de suivi des envois (A2Z-Logistics). Interface en anglais ; données personnelles masquées.'}],
       steps:[
-        ['L\'orchestration','Au-dessus de l\'intégration, une couche d\'orchestration : visualisation des données, enrichissement en temps réel, décision humaine et applications sans code. Elle sert les équipes internes, les partenaires et les agents IA.',0],
-        ['Connexion','L\'utilisateur se connecte avec un identifiant ou son compte Microsoft.',1],
-        ['La liste','Il ouvre une liste de chargement : transporteur, ligne de transport, créneaux, conteneur, expéditeur et destinataire.',2],
-        ['Les onglets','Envois, CMR/CO2, origine, chargement, entrée, déchargement, frais de fret : tout le dossier est au même endroit.',2],
-        ['L\'action','Il corrige, copie, annule ou enregistre, et suit le statut de travail et de suivi. Les modifications sont historisées.',2],
-        ['Le suivi','Un tableau de bord réunit les envois : liste filtrable, carte du trajet, expéditeur, destinataire, bilan CO2, et des compteurs (en avance, en retard, abîmés, perdus).',3]
+        ['L\'orchestration','Au-dessus de l\'intégration, une couche d\'orchestration : visualisation des données, enrichissement en temps réel, décision humaine et applications sans code. Elle sert les équipes internes, les partenaires et les agents IA.',1],
+        ['Connexion','L\'utilisateur se connecte avec un identifiant ou son compte Microsoft.',2],
+        ['La liste','Il ouvre une liste de chargement : transporteur, ligne de transport, créneaux, conteneur, expéditeur et destinataire.',3],
+        ['Les onglets','Envois, CMR/CO2, origine, chargement, entrée, déchargement, frais de fret : tout le dossier est au même endroit.',3],
+        ['L\'action','Il corrige, copie, annule ou enregistre, et suit le statut de travail et de suivi. Les modifications sont historisées.',3],
+        ['Le suivi','Un tableau de bord réunit les envois : liste filtrable, carte du trajet, expéditeur, destinataire, bilan CO2, et des compteurs (en avance, en retard, abîmés, perdus).',4]
       ]}
   },
   { icon:'db', title:'Serveur MCP natif',
@@ -580,6 +581,7 @@ Object.assign(EN, {"Traitement de documents non structurés (UDP) : PDF et image
 Object.assign(EN, {"Vidéo Lobster « Release 26.1: Trading Partner Manager - Automate Partner Onboarding », lancée à 11:49.":"Lobster video \"Release 26.1: Trading Partner Manager - Automate Partner Onboarding\", starting at 11:49.","Vidéo de démonstration du Trading Partner Manager":"Trading Partner Manager demo video"});
 Object.assign(EN, {"Vidéo Lobster sur l'API de plateforme":"Lobster video on the platform API","Vidéo Lobster « Platform API ».":"Lobster video \"Platform API\"."});
 Object.assign(EN, {"Vidéo Lobster sur le serveur MCP":"Lobster video on the MCP server","Vidéo Lobster « Release 25.1: Lobster MCP ».":"Lobster video \"Release 25.1: Lobster MCP\".","Le serveur MCP en action":"The MCP server in action","Par exemple : consulter un produit dans l'ERP, un client dans le CRM, la disponibilité d'un fournisseur.":"For example: look up a product in the ERP, a customer in the CRM, a supplier's availability."});
+Object.assign(EN, {"Vidéo":"Video","Vidéo Lobster : Pathfinder pour l'orchestration":"Lobster video: Pathfinder for Orchestration","Vidéo Lobster « Pathfinder for Orchestration ».":"Lobster video \"Pathfinder for Orchestration\"."});
 const T = s => (L==='en' && EN[s]!==undefined) ? EN[s] : s;
 function applyStatic(){
   document.querySelectorAll('[data-t]').forEach(el=>{ if(!el.dataset.fr) el.dataset.fr = el.innerHTML.trim(); el.innerHTML = T(el.dataset.fr); });
