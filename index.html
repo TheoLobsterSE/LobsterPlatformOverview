@@ -371,6 +371,15 @@ html #detail .d-head h2{margin:0 0 6px}
 #home .tile:hover .pftag{border-color:var(--g500);color:var(--g500)}
 #home .tile:hover .pftag svg{stroke:var(--g500)}
 #home .pf-legend{font-size:14px;color:var(--g200)}
+/* Accueil : tuiles plus aérées sur les écrans assez hauts */
+@media (min-height:861px){
+  #home .tile{padding:22px 24px;min-height:clamp(240px,27vh,300px)}
+  #home .trow{margin-bottom:14px}
+  #home .tile .icon{margin-bottom:16px}
+  #home .tile h2{margin-bottom:8px}
+  #home .more{padding-top:14px}
+  #home .grid{gap:18px}
+}
 </style>
 </head>
 <body>
